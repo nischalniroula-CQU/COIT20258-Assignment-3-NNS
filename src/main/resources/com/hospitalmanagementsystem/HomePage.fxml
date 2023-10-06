@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hospitalmanagementsystem.LoginPageController">
+   <children>
+      <ImageView fitHeight="118.0" fitWidth="228.0" layoutX="449.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../java/images/hospital%20logo.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="loginButtonId" layoutX="1110.0" layoutY="744.0" mnemonicParsing="false" text="Log Out" />
+      <Label layoutX="67.0" layoutY="221.0" text="Menu" textFill="#2986c3">
+         <font>
+            <Font name="Raleway SemiBold" size="16.0" />
+         </font>
+      </Label>
+      <Group layoutX="67.0" layoutY="255.0">
+         <children>
+            <Label layoutX="29.0" layoutY="131.0" text="Resigter Patients">
+               <font>
+                  <Font name="Raleway" size="13.0" />
+               </font>
+            </Label>
+            <Button alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="118.0" prefWidth="160.0" textAlignment="JUSTIFY">
+               <graphic>
+                  <ImageView fitHeight="67.0" fitWidth="82.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../java/images/register.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </Group>
+      <Group layoutX="267.0" layoutY="254.0">
+         <children>
+            <Label layoutX="7.0" layoutY="133.0" text="Schedule Appointments" textAlignment="CENTER">
+               <font>
+                  <Font name="Raleway" size="13.0" />
+               </font>
+            </Label>
+            <Button alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="118.0" prefWidth="160.0" textAlignment="JUSTIFY">
+               <graphic>
+                  <ImageView fitHeight="67.0" fitWidth="82.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../java/images/appointment.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </Group>
+      <Group layoutX="67.0" layoutY="430.0">
+         <children>
+            <Label layoutX="39.0" layoutY="134.0" text="View Patients" textAlignment="CENTER">
+               <font>
+                  <Font name="Raleway" size="13.0" />
+               </font>
+            </Label>
+            <Button alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="118.0" prefWidth="160.0" textAlignment="JUSTIFY">
+               <graphic>
+                  <ImageView fitHeight="67.0" fitWidth="82.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../java/images/hospitalisation.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </Group>
+      <Group layoutX="267.0" layoutY="430.0">
+         <children>
+            <Label layoutX="58.0" layoutY="135.0" text="Billings" textAlignment="CENTER">
+               <font>
+                  <Font name="Raleway" size="13.0" />
+               </font>
+            </Label>
+            <Button alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="118.0" prefWidth="160.0" textAlignment="JUSTIFY">
+               <graphic>
+                  <ImageView fitHeight="67.0" fitWidth="82.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../java/images/bill.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </Group>
+      <Label layoutX="587.0" layoutY="231.0" text="Dashboard" textFill="#2986c3">
+         <font>
+            <Font name="Raleway SemiBold" size="16.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
