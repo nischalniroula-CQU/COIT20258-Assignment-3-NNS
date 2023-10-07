@@ -11,13 +11,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hospitalmanagementsystem.LoginPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hospitalmanagementsystem.HomePageController">
    <children>
       <ImageView fitHeight="118.0" fitWidth="228.0" layoutX="449.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/hospital%20logo.png" />
          </image></ImageView>
-      <Button fx:id="loginButtonId" layoutX="1110.0" layoutY="744.0" mnemonicParsing="false" text="Log Out">
+      <Button fx:id="logoutButtonId" layoutX="1110.0" layoutY="744.0" mnemonicParsing="false" onAction="#handleLogoutButtonAction" text="Log Out">
          <font>
             <Font name="Raleway" size="13.0" />
          </font></Button>
@@ -33,7 +33,7 @@
                   <Font name="Raleway" size="13.0" />
                </font>
             </Label>
-            <Button alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="118.0" prefWidth="160.0" textAlignment="JUSTIFY">
+            <Button fx:id="registerPatientsButton" alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#handleRegisterPatientsButtonAction" prefHeight="118.0" prefWidth="160.0" textAlignment="JUSTIFY">
                <graphic>
                   <ImageView fitHeight="67.0" fitWidth="82.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -51,7 +51,7 @@
                   <Font name="Raleway" size="13.0" />
                </font>
             </Label>
-            <Button alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="118.0" prefWidth="160.0" textAlignment="JUSTIFY">
+            <Button fx:id="scheduleAppointmentsButton" alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#handleScheduleAppointmentsButtonAction" prefHeight="118.0" prefWidth="160.0" textAlignment="JUSTIFY">
                <graphic>
                   <ImageView fitHeight="67.0" fitWidth="82.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -69,7 +69,7 @@
                   <Font name="Raleway" size="13.0" />
                </font>
             </Label>
-            <Button alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="118.0" prefWidth="160.0" textAlignment="JUSTIFY">
+            <Button fx:id="viewPatientsButton" alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#handleViewPatientsButtonAction" prefHeight="118.0" prefWidth="160.0" textAlignment="JUSTIFY">
                <graphic>
                   <ImageView fitHeight="67.0" fitWidth="82.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -87,7 +87,7 @@
                   <Font name="Raleway" size="13.0" />
                </font>
             </Label>
-            <Button alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="118.0" prefWidth="160.0" textAlignment="JUSTIFY">
+            <Button fx:id="billingsButton" alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#handleBillingsButtonAction" prefHeight="118.0" prefWidth="160.0" textAlignment="JUSTIFY">
                <graphic>
                   <ImageView fitHeight="67.0" fitWidth="82.0" pickOnBounds="true" preserveRatio="true">
                      <image>
