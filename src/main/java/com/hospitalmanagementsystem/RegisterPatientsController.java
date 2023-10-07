@@ -84,14 +84,6 @@ public class RegisterPatientsController {
     private void submitButtonAction(ActionEvent event) {
         // Handle the submit button logic here.
 
-        String patientId = patientID.getText();
-        String firstName = firstNameID.getText();
-        String lastName = lastNameID.getText();
-        String dob = (dobPicker.getValue() != null) ? dobPicker.getValue().toString() : null;
-        String gender = genderChoiceBox.getSelectionModel().getSelectedItem();
-        String bloodGroup = bloodGroupChoiceBox.getSelectionModel().getSelectedItem();
-        String department = DepartmentChoiceBox1.getSelectionModel().getSelectedItem();
-
         // You can now use the data for your desired purpose, like saving to a database.
 
     }

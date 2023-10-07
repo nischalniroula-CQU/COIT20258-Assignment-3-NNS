@@ -77,12 +77,55 @@ public class HomePageController {
 
     @FXML
     private void handleScheduleAppointmentsButtonAction(ActionEvent event) {
-        System.out.println("Schedule APpointment Button Pressed");
+     try {
+            // Load the Register.fxml content
+            Parent registerContent = FXMLLoader.load(getClass().getResource("/com/hospitalmanagementsystem/ScheduleAppointments.fxml"));
+            
+                   System.out.println("Register Page found");
+
+
+            // Create a new scene with the loaded content
+            Scene registerScene = new Scene(registerContent);
+
+            // Display in a new window (Stage)
+            Stage registerStage = new Stage();
+            registerStage.setScene(registerScene);
+            registerStage.show();
+
+            //If you want to close the current window after opening the new one:
+            ((Node) (event.getSource())).getScene().getWindow().hide();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error loading Register.fxml");
+            // Handle the exception (show an alert or log the error)
+        }
+    
     }
 
     @FXML
     private void handleViewPatientsButtonAction(ActionEvent event) {
-        System.out.println("View Patients Button Pressed");
+             try {
+            // Load the Register.fxml content
+            Parent registerContent = FXMLLoader.load(getClass().getResource("/com/hospitalmanagementsystem/ViewPatients.fxml"));
+
+
+            // Create a new scene with the loaded content
+            Scene registerScene = new Scene(registerContent);
+
+            // Display in a new window (Stage)
+            Stage registerStage = new Stage();
+            registerStage.setScene(registerScene);
+            registerStage.show();
+
+            //If you want to close the current window after opening the new one:
+            ((Node) (event.getSource())).getScene().getWindow().hide();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error loading Register.fxml");
+            // Handle the exception (show an alert or log the error)
+        }
     }
 
     @FXML
