@@ -32,7 +32,7 @@ public class LoginPageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         roleId.getItems().addAll("Admin", "Staff");
-    roleId.getSelectionModel().selectFirst(); // Optionally select the first item by default
+        roleId.getSelectionModel().selectFirst(); // Optionally select the first item by default
         // TODO
     }    
 
