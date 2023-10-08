@@ -12,6 +12,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import java.io.IOException;
+import javafx.scene.control.ChoiceBox;
 
 public class LoginPageController implements Initializable {
 
@@ -23,9 +24,15 @@ public class LoginPageController implements Initializable {
     private Button loginButtonId;
     @FXML
     private Button cancelButtonId;
+    
+    @FXML
+    private ChoiceBox<String> roleId;
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        roleId.getItems().addAll("Admin", "Staff");
+    roleId.getSelectionModel().selectFirst(); // Optionally select the first item by default
         // TODO
     }    
 
@@ -57,4 +64,6 @@ public class LoginPageController implements Initializable {
         Stage stage = (Stage) cancelButtonId.getScene().getWindow();
         stage.close(); // Close the window
     }
+    
+
 }
