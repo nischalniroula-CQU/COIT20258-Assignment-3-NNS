@@ -31,14 +31,33 @@ public class ConnectionClass {
                 // Switch to 'hospital_db'
                 con.setCatalog("hospital_db");
                 stm = con.createStatement();
-
-                // Note: At this point, you can add code to create initial tables if desired.
-                // For now, we'll just set up the database.
+                
+                // Create the patients table
+                
+                createPatientsTable();
+                
+                // Create the staffs table
+                
+                createStaffsTable();
 
             } else {
                 // If 'hospital_db' exists, switch to it
                 con.setCatalog("hospital_db");
                 stm = con.createStatement();
+                
+                // Check if the 'patients' table exists in 'hospital_db'
+                ResultSet tableCheck = stm.executeQuery("SHOW TABLES LIKE 'patients'");
+                if (!tableCheck.next()) {
+                // Create the 'patients' table if it doesn't exist
+                createPatientsTable();
+                }
+                
+               // Check if the 'staffs' table exists in 'hospital_db'
+               tableCheck = stm.executeQuery("SHOW TABLES LIKE 'staffs'");
+               if (!tableCheck.next()) {
+               // Create the 'staffs' table if it doesn't exist
+               createStaffsTable();
+} 
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -53,4 +72,34 @@ public class ConnectionClass {
     public static void main(String[] args) {
         new ConnectionClass();
     }
+    
+    private void createPatientsTable() throws SQLException {
+    String createTableSQL = "CREATE TABLE patients ("
+            + "patient_id VARCHAR(255) PRIMARY KEY,"
+            + "first_name VARCHAR(255) NOT NULL,"
+            + "last_name VARCHAR(255) NOT NULL,"
+            + "date_of_birth DATE NOT NULL,"
+            + "gender ENUM('Male', 'Female', 'Other') NOT NULL,"
+            + "blood_group ENUM('A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-') NOT NULL,"
+            + "department ENUM('Cardiology', 'Neurology', 'Orthopedics', 'Dermatology', 'Emergency') NOT NULL"
+            + ")";
+    stm.executeUpdate(createTableSQL);
+    }
+    
+    private void createStaffsTable() throws SQLException {
+    String createTableSQL = "CREATE TABLE staffs ("
+            + "staff_id VARCHAR(255) PRIMARY KEY,"
+            + "first_name VARCHAR(255) NOT NULL,"
+            + "last_name VARCHAR(255) NOT NULL,"
+            + "email VARCHAR(255),"
+            + "phone_number VARCHAR(20),"
+            + "address TEXT,"
+            + "gender ENUM('Male', 'Female', 'Other') NOT NULL,"
+            + "blood_group ENUM('A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-') NOT NULL,"
+            + "department ENUM('Cardiology', 'Neurology', 'Administration', 'Radiology') NOT NULL,"
+            + "date_of_birth DATE NOT NULL"
+            + ")";
+    stm.executeUpdate(createTableSQL);
+    }
+
 }
