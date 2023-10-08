@@ -12,6 +12,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import java.io.IOException;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ChoiceBox;
 
 public class LoginPageController implements Initializable {
@@ -38,31 +40,54 @@ public class LoginPageController implements Initializable {
 
     @FXML
     private void handleLoginButtonAction() {
-        try {
-            // Load HomePage.fxml
-            Parent homePage = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
-            
-            // Get the stage from any component e.g. loginButtonId
-            Stage stage = (Stage) loginButtonId.getScene().getWindow();
-            
-            // Set the new scene to the stage
-            stage.setScene(new Scene(homePage));
+        String username = usernameId.getText();
+        String password = passwordId.getText();
+        String role = roleId.getSelectionModel().getSelectedItem();
 
-            // Optionally set the title of the stage
-            // stage.setTitle("Home Page");
-
-            // Display the new scene
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (authenticate(username, password, role)) {
+            try {
+                // Load HomePage.fxml or any other page based on the role
+                Parent homePage = FXMLLoader.load(getClass().getResource(getHomePageForRole(role)));
+                
+                Stage stage = (Stage) loginButtonId.getScene().getWindow();
+                stage.setScene(new Scene(homePage));
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Login Failed");
+            alert.setHeaderText(null);
+            alert.setContentText("Invalid credentials. Please try again.");
+            alert.showAndWait();
         }
     }
 
     @FXML
     private void handleCancelButtonAction() {
-        // Get the stage from any component e.g. cancelButtonId
         Stage stage = (Stage) cancelButtonId.getScene().getWindow();
-        stage.close(); // Close the window
+        stage.close();
+    }
+
+    private boolean authenticate(String username, String password, String role) {
+        // Basic authentication for demonstration purposes
+        if ("Admin".equals(role) && "admin".equals(username) && "admin123".equals(password)) {
+            return true;
+        } else if ("Staff".equals(role) && "staff".equals(username) && "staff123".equals(password)) {
+            return true;
+        }
+        return false;
+    }
+
+    private String getHomePageForRole(String role) {
+        // Return the appropriate FXML file based on the role
+        if ("Admin".equals(role)) {
+            return "AdminHomePage.fxml";
+        } else if ("Staff".equals(role)) {
+            return "HomePage.fxml";
+        }
+        return "HomePage.fxml"; // default
     }
     
 
