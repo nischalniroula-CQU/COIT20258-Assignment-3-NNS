@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hospitalmanagementsystem.HomePageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hospitalmanagementsystem.AdminHomePageController">
    <children>
       <ImageView fitHeight="800.0" fitWidth="1200.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -33,70 +33,52 @@
       </Label>
       <Group layoutX="67.0" layoutY="255.0">
          <children>
-            <Label layoutX="29.0" layoutY="131.0" text="Resigter Patients">
+            <Label layoutX="36.0" layoutY="133.0" text="Register Staffs">
                <font>
                   <Font name="Raleway" size="13.0" />
                </font>
             </Label>
-            <Button fx:id="registerPatientsButton" alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#handleRegisterPatientsButtonAction" prefHeight="118.0" prefWidth="160.0" textAlignment="JUSTIFY">
+            <Button fx:id="registerStaffsButton" alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#handleRegisterStaffsButtonAction" prefHeight="118.0" prefWidth="160.0" textAlignment="JUSTIFY">
                <graphic>
                   <ImageView fitHeight="67.0" fitWidth="82.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../images/register.png" />
+                        <Image url="@../../images/registerstaff.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
          </children>
       </Group>
-      <Group layoutX="267.0" layoutY="254.0">
+      <Group layoutX="277.0" layoutY="254.0">
          <children>
-            <Label layoutX="7.0" layoutY="133.0" text="Schedule Appointments" textAlignment="CENTER">
+            <Label layoutX="46.0" layoutY="135.0" text="View Staffs" textAlignment="CENTER">
                <font>
                   <Font name="Raleway" size="13.0" />
                </font>
             </Label>
-            <Button fx:id="scheduleAppointmentsButton" alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#handleScheduleAppointmentsButtonAction" prefHeight="118.0" prefWidth="160.0" textAlignment="JUSTIFY">
+            <Button fx:id="viewStaffsButton" alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#handleViewStaffsButtonAction" prefHeight="118.0" prefWidth="160.0" textAlignment="JUSTIFY">
                <graphic>
                   <ImageView fitHeight="67.0" fitWidth="82.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../images/appointment.png" />
+                        <Image url="@../../images/team.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
          </children>
       </Group>
-      <Group layoutX="468.0" layoutY="253.0">
+      <Group layoutX="496.0" layoutY="254.0">
          <children>
-            <Label layoutX="39.0" layoutY="134.0" text="View Patients" textAlignment="CENTER">
+            <Label layoutX="29.0" layoutY="136.0" text="Report &amp; Analytics" textAlignment="CENTER">
                <font>
                   <Font name="Raleway" size="13.0" />
                </font>
             </Label>
-            <Button fx:id="viewPatientsButton" alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#handleViewPatientsButtonAction" prefHeight="118.0" prefWidth="160.0" textAlignment="JUSTIFY">
+            <Button fx:id="reportButton" alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#handlereportButtonAction" prefHeight="118.0" prefWidth="160.0" textAlignment="JUSTIFY">
                <graphic>
                   <ImageView fitHeight="67.0" fitWidth="82.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../images/hospitalisation.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-         </children>
-      </Group>
-      <Group layoutX="668.0" layoutY="253.0">
-         <children>
-            <Label layoutX="58.0" layoutY="135.0" text="Billings" textAlignment="CENTER">
-               <font>
-                  <Font name="Raleway" size="13.0" />
-               </font>
-            </Label>
-            <Button fx:id="billingsButton" alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#handleBillingsButtonAction" prefHeight="118.0" prefWidth="160.0" textAlignment="JUSTIFY">
-               <graphic>
-                  <ImageView fitHeight="67.0" fitWidth="82.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../images/bill.png" />
+                        <Image url="@../../images/report.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -121,14 +103,14 @@
             <Font name="Raleway" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="1061.0" layoutY="124.0" text="Staff Menu">
+      <Label layoutX="1054.0" layoutY="124.0" text="Admin Menu">
          <font>
             <Font name="Raleway SemiBold" size="16.0" />
          </font>
       </Label>
       <ImageView fitHeight="68.0" fitWidth="75.0" layoutX="1068.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../images/team.png" />
+            <Image url="@../../images/admin.png" />
          </image>
       </ImageView>
    </children>
