@@ -12,10 +12,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.sql.PreparedStatement;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 
 public class RegisterPatientsController {
 
+    // Database connection
+    private ConnectionClass connectionClass = new ConnectionClass();
+    
     @FXML
     private TextField patientID;
 
@@ -84,9 +90,40 @@ public class RegisterPatientsController {
     private void submitButtonAction(ActionEvent event) {
         // Handle the submit button logic here.
 
-        // You can now use the data for your desired purpose, like saving to a database.
+        try {
+            String query = "INSERT INTO patients (patient_id, first_name, last_name, date_of_birth, gender, blood_group, department) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement preparedStatement = connectionClass.con.prepareStatement(query);
+            preparedStatement.setString(1, patientID.getText());
+            preparedStatement.setString(2, firstNameID.getText());
+            preparedStatement.setString(3, lastNameID.getText());
+            preparedStatement.setDate(4, java.sql.Date.valueOf(dobPicker.getValue()));
+            preparedStatement.setString(5, genderChoiceBox.getValue());
+            preparedStatement.setString(6, bloodGroupChoiceBox.getValue());
+            preparedStatement.setString(7, DepartmentChoiceBox1.getValue());
 
+            int result = preparedStatement.executeUpdate();
+
+            if (result == 1) {
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setHeaderText(null);
+                alert.setContentText("Patient registered successfully!");
+                alert.showAndWait();
+                cancelButtonAction(event); // Navigate back to the home page after successful registration
+            } else {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("Failed to register patient. Please try again.");
+                alert.showAndWait();
+            }
+        } catch (Exception e) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("An error occurred: " + e.getMessage());
+            alert.showAndWait();
+        }
     }
 
-    
-}
+    }
