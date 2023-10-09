@@ -43,6 +43,8 @@ public class HomePageController {
 
     @FXML
     private void handleLogoutButtonAction(ActionEvent event) {
+        Stage stage = (Stage) logoutButtonId.getScene().getWindow();
+        stage.close();
         System.out.println("Logout Button Pressed");
     }
 
