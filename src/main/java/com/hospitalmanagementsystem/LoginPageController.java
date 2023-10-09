@@ -12,6 +12,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ChoiceBox;
@@ -29,12 +31,15 @@ public class LoginPageController implements Initializable {
     
     @FXML
     private ChoiceBox<String> roleId;
+    
+    private ConnectionClass connectionClass;
 
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         roleId.getItems().addAll("Admin", "Staff");
         roleId.getSelectionModel().selectFirst(); // Optionally select the first item by default
+        connectionClass = new ConnectionClass();
         // TODO
     }    
 
@@ -71,6 +76,22 @@ public class LoginPageController implements Initializable {
     }
 
     private boolean authenticate(String username, String password, String role) {
+        try {
+            String query = "SELECT * FROM staffs WHERE username=? AND password=? AND role=?";
+            PreparedStatement preparedStatement = connectionClass.con.prepareStatement(query);
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, password);
+            preparedStatement.setString(3, role);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return resultSet.next();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    
+    /*private boolean authenticate(String username, String password, String role) {
         // Basic authentication for demonstration purposes
         if ("Admin".equals(role) && "admin".equals(username) && "admin123".equals(password)) {
             return true;
@@ -78,7 +99,8 @@ public class LoginPageController implements Initializable {
             return true;
         }
         return false;
-    }
+    }*/
+    
 
     private String getHomePageForRole(String role) {
         // Return the appropriate FXML file based on the role
