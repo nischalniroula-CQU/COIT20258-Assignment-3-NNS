@@ -15,6 +15,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.time.LocalDate;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DateCell;
 
@@ -46,13 +48,14 @@ public class ScheduleAppointmentsController implements Initializable {
     
     // Database connection
     private ConnectionClass connectionClass = new ConnectionClass();
+    String[] times = {"09:00 AM", "10:00 AM", "11:00 AM", "01:00 PM", "02:00 PM"};
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Initialize your components here
 
         // For example, populate timeChoiceBox
-        timeChoiceBox.getItems().addAll("09:00 AM", "10:00 AM", "11:00 AM", "01:00 PM", "02:00 PM");
+        timeChoiceBox.getItems().addAll(times);
 
         // Populate bloodGroupChoiceBox
         bloodGroupChoiceBox.getItems().addAll("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-");
@@ -64,8 +67,26 @@ public class ScheduleAppointmentsController implements Initializable {
             super.updateItem(date, empty);
             LocalDate today = LocalDate.now();
 
-            setDisable(empty || date.compareTo(today) < 0 );
+            setDisable(empty || date.compareTo(today) < 1 );
         }
+    });
+        timeChoiceBox.setDisable(true);
+        DepartmentChoiceBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+      @Override
+      public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2) {
+          if (datePicker.getValue() != null) {
+              timeChoiceBox.setDisable(false);
+          }
+      }
+    });
+        
+        datePicker.setOnAction(event -> 
+    {
+        String department = DepartmentChoiceBox.getSelectionModel().getSelectedItem();
+        if (department != null) {
+            timeChoiceBox.setDisable(false);
+        }
+        
     });
     }    
 
@@ -91,23 +112,18 @@ public class ScheduleAppointmentsController implements Initializable {
         e.printStackTrace();
     }
     }
-    
-    @FXML
-    private void timePickerClicked() {
-        System.out.println("Im here");
-    }
 
     @FXML
     private void submitButtonAction() {
         // Handle the submission logic here
-        System.out.println("Im here");
+        
         String firstName = firstNameID.getText();
         String lastName = lastNameID.getText();
         String date = (datePicker.getValue() != null) ? datePicker.getValue().toString() : null;
         String time = timeChoiceBox.getSelectionModel().getSelectedItem();
         String bloodGroup = bloodGroupChoiceBox.getSelectionModel().getSelectedItem();
         String department = DepartmentChoiceBox.getSelectionModel().getSelectedItem();
-
+        System.out.println(department);
         // You can now use the data for your desired purpose, like saving to a database or other services.
 
         // After the appointment has been scheduled, you might want to close the window or navigate to a different page.
