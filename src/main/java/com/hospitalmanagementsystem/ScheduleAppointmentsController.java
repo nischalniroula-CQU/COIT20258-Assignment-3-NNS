@@ -14,7 +14,9 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.PreparedStatement;
+import java.time.LocalDate;
 import javafx.scene.control.Alert;
+import javafx.scene.control.DateCell;
 
 public class ScheduleAppointmentsController implements Initializable {
 
@@ -57,6 +59,14 @@ public class ScheduleAppointmentsController implements Initializable {
 
         // Populate DepartmentChoiceBox
         DepartmentChoiceBox.getItems().addAll("Cardiology", "Neurology", "Orthopedics", "Dermatology", "Emergency");
+        datePicker.setDayCellFactory(picker -> new DateCell() {
+        public void updateItem(LocalDate date, boolean empty) {
+            super.updateItem(date, empty);
+            LocalDate today = LocalDate.now();
+
+            setDisable(empty || date.compareTo(today) < 0 );
+        }
+    });
     }    
 
     @FXML
@@ -81,11 +91,16 @@ public class ScheduleAppointmentsController implements Initializable {
         e.printStackTrace();
     }
     }
+    
+    @FXML
+    private void timePickerClicked() {
+        System.out.println("Im here");
+    }
 
     @FXML
     private void submitButtonAction() {
         // Handle the submission logic here
-
+        System.out.println("Im here");
         String firstName = firstNameID.getText();
         String lastName = lastNameID.getText();
         String date = (datePicker.getValue() != null) ? datePicker.getValue().toString() : null;
