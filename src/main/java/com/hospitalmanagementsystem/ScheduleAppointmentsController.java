@@ -13,6 +13,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.sql.PreparedStatement;
+import javafx.scene.control.Alert;
 
 public class ScheduleAppointmentsController implements Initializable {
 
@@ -39,6 +41,9 @@ public class ScheduleAppointmentsController implements Initializable {
 
     @FXML
     private Button submitButton;
+    
+    // Database connection
+    private ConnectionClass connectionClass = new ConnectionClass();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -91,5 +96,39 @@ public class ScheduleAppointmentsController implements Initializable {
         // You can now use the data for your desired purpose, like saving to a database or other services.
 
         // After the appointment has been scheduled, you might want to close the window or navigate to a different page.
+        
+        try {
+            String query = "INSERT INTO schedules (first_name, last_name, date, time, blood_group, department) VALUES (?, ?, ?, ?, ?, ?)";
+            PreparedStatement preparedStatement = connectionClass.con.prepareStatement(query);
+            preparedStatement.setString(1, firstName);
+            preparedStatement.setString(2, lastName);
+            preparedStatement.setString(3, date);
+            preparedStatement.setString(4, time);
+            preparedStatement.setString(5, bloodGroup);
+            preparedStatement.setString(6, department);
+
+            int result = preparedStatement.executeUpdate();
+
+            if (result == 1) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setHeaderText(null);
+                alert.setContentText("Schedule appointment  successfully!");
+                alert.showAndWait();
+                cancelButtonAction(); // Close the window after successful registration
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("Failed to schedule appointment. Please try again using different time.");
+                alert.showAndWait();
+            }
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("An error occurred: " + e.getMessage());
+            alert.showAndWait();
+        }
     }
 }

@@ -18,7 +18,7 @@ public class ConnectionClass {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             // Establish a connection to the MySQL server without specifying a database
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/?serverTimezone=UTC", "root", "root");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/?serverTimezone=UTC", "root", "P@tan123");
             stm = con.createStatement();
 
             // Check if the database 'hospital_db' exists
@@ -75,7 +75,7 @@ public class ConnectionClass {
     
     private void createPatientsTable() throws SQLException {
     String createTableSQL = "CREATE TABLE patients ("
-            + "patient_id VARCHAR(255) PRIMARY KEY,"
+            + "patient_id VARCHAR(255) PRIMARY KEY AUTO_INCREMENT,"
             + "first_name VARCHAR(255) NOT NULL,"
             + "last_name VARCHAR(255) NOT NULL,"
             + "date_of_birth DATE NOT NULL,"
@@ -88,7 +88,7 @@ public class ConnectionClass {
     
     private void createStaffsTable() throws SQLException {
     String createTableSQL = "CREATE TABLE staffs ("
-            + "staff_id VARCHAR(255) PRIMARY KEY,"
+            + "staff_id VARCHAR(255) PRIMARY KEY AUTO_INCREMENT,"
             + "first_name VARCHAR(255) NOT NULL,"
             + "last_name VARCHAR(255) NOT NULL,"
             + "email VARCHAR(255),"
