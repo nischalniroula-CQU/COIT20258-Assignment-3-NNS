@@ -13,31 +13,11 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hospitalmanagementsystem.LoginPageController">
    <children>
-      <ImageView fitHeight="101.0" fitWidth="213.0" layoutX="37.0" layoutY="263.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="99.0" fitWidth="150.0" layoutX="406.0" layoutY="295.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../java/images/hospital%20logo.png" />
+            <Image url="@../../images/hospital%20logo.png" />
          </image>
       </ImageView>
-      <Group layoutX="39.0" layoutY="176.0">
-         <children>
-            <Label text="Username" textFill="#2986c3">
-               <font>
-                  <Font name="Raleway Medium" size="13.0" />
-               </font>
-            </Label>
-            <TextField fx:id="usernameId" layoutY="25.0" promptText="Enter Your Username" />
-         </children>
-      </Group>
-      <Group layoutX="239.0" layoutY="175.0">
-         <children>
-            <Label layoutX="-15.0" text="Password" textFill="#2986c3">
-               <font>
-                  <Font name="Raleway Medium" size="13.0" />
-               </font>
-            </Label>
-            <PasswordField fx:id="passwordId" layoutX="-15.0" layoutY="26.0" promptText="Enter Your Password" />
-         </children>
-      </Group>
       <Label layoutX="261.0" layoutY="28.0" text="Welcome To">
          <font>
             <Font name="Raleway" size="13.0" />
@@ -48,6 +28,32 @@
             <Font name="Raleway SemiBold" size="16.0" />
          </font>
       </Label>
+      <Group layoutX="39.0" layoutY="176.0">
+         <children>
+            <Label text="Username" textFill="#2986c3">
+               <font>
+                  <Font name="Raleway Medium" size="13.0" />
+               </font>
+            </Label>
+            <TextField fx:id="usernameId" layoutY="25.0" promptText="Enter Your Username">
+               <font>
+                  <Font name="Raleway" size="13.0" />
+               </font></TextField>
+         </children>
+      </Group>
+      <Group layoutX="239.0" layoutY="175.0">
+         <children>
+            <Label layoutX="-15.0" text="Password" textFill="#2986c3">
+               <font>
+                  <Font name="Raleway Medium" size="13.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="passwordId" layoutX="-15.0" layoutY="26.0" promptText="Enter Your Password">
+               <font>
+                  <Font name="Raleway" size="13.0" />
+               </font></PasswordField>
+         </children>
+      </Group>
       <Group layoutX="39.0" layoutY="108.0">
          <children>
             <Label text="Choose Role" textFill="#2986c3">
@@ -58,7 +64,13 @@
             <ChoiceBox fx:id="roleId" layoutY="22.0" prefWidth="150.0" />
          </children>
       </Group>
-      <Button fx:id="loginButtonId" layoutX="422.0" layoutY="200.0" mnemonicParsing="false" onAction="#handleLoginButtonAction" text="Login" />
-      <Button fx:id="cancelButtonId" layoutX="499.0" layoutY="200.0" mnemonicParsing="false" onAction="#handleCancelButtonAction" text="Cancel" />
+      <Button fx:id="loginButtonId" layoutX="427.0" layoutY="200.0" mnemonicParsing="false" onAction="#handleLoginButtonAction" text="Login" textFill="#30b950">
+         <font>
+            <Font name="Raleway Medium" size="13.0" />
+         </font></Button>
+      <Button fx:id="cancelButtonId" layoutX="499.0" layoutY="200.0" mnemonicParsing="false" onAction="#handleCancelButtonAction" text="Cancel" textFill="RED">
+         <font>
+            <Font name="Raleway Light" size="13.0" />
+         </font></Button>
    </children>
 </AnchorPane>

@@ -1,5 +1,6 @@
 package com.hospitalmanagementsystem;
 
+import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -25,9 +26,23 @@ public class AdminHomePageController {
     // Methods handling the button actions
     @FXML
     private void handleLogoutButtonAction() {
-        // Code to handle logout action
+        try {
+        // Load the login page
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Login Page.fxml"));
+        Parent loginPage = loader.load();
+
+        // Get the current stage using any component (e.g., the cancel button)
         Stage stage = (Stage) logoutButtonId.getScene().getWindow();
-        stage.close();
+
+        // Set the scene for the stage
+        stage.setScene(new Scene(loginPage));
+
+ 
+        // Display the stage
+        stage.show();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
     }
 
     @FXML

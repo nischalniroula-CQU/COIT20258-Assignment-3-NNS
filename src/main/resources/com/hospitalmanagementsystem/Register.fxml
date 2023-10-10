@@ -79,5 +79,29 @@
          </font>
       </Label>
       <ChoiceBox fx:id="DepartmentChoiceBox1" layoutX="482.0" layoutY="299.0" prefHeight="25.0" prefWidth="161.0" />
+      <Label layoutX="379.0" layoutY="364.0" text="Weight:" textFill="#2986c3">
+         <font>
+            <Font name="Raleway" size="13.0" />
+         </font>
+      </Label>
+      <TextField fx:id="weightID" layoutX="482.0" layoutY="359.0" />
+      <Label layoutX="39.0" layoutY="364.0" text="Height:" textFill="#2986c3">
+         <font>
+            <Font name="Raleway" size="13.0" />
+         </font>
+      </Label>
+      <TextField fx:id="heightID" layoutX="142.0" layoutY="359.0" />
+      <Label layoutX="379.0" layoutY="417.0" text="BMI:" textFill="#2986c3">
+         <font>
+            <Font name="Raleway" size="13.0" />
+         </font>
+      </Label>
+      <TextField fx:id="bmiID" layoutX="482.0" layoutY="412.0" />
+      <Label layoutX="39.0" layoutY="417.0" text="Blood Pressure: " textFill="#2986c3">
+         <font>
+            <Font name="Raleway" size="13.0" />
+         </font>
+      </Label>
+      <TextField fx:id="bloodPressureID" layoutX="142.0" layoutY="412.0" />
    </children>
 </AnchorPane>

@@ -1,44 +1,67 @@
 package com.hospitalmanagementsystem;
 
+import java.io.IOException;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class ViewStaffsController {
 
-    // TextFields
-    @FXML
-    private TextField searchID;
-
-    // TableView
-    @FXML
-    private TableView<?> patientsTable; // Replace the wildcard with a specific type if needed
-
-    // Buttons
+       // Define the UI components from FXML
     @FXML
     private Button cancelButton;
+
     @FXML
-    private Button searchButton;
+    private TextArea StaffID;  
+    
+    private TextArea firstNameID;
+    @FXML
+    private TextArea lastNameID;
+    @FXML
+    private TextArea dobID;
+    @FXML
+    private TextArea genderID;
+    @FXML
+    private TextArea bloodGroupID;
+    @FXML
+    private TextArea departmentID;
+    @FXML
+    private TextArea phoneNumberID;
+    @FXML
+    private TextArea emailID;
+    @FXML
+    private TextArea addressID;
 
     // Methods handling the button actions
     @FXML
     private void cancelButtonAction() {
-        // Code to handle the "Go to home" action
-        System.out.println("Go to home clicked.");
-        // Implement the logic to navigate to the home page, possibly using a scene change.
+                            try {
+        // Load the home page
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminHomePage.fxml"));
+        Parent homePage = loader.load();
+
+        // Get the current stage using any component (e.g., the cancel button)
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+
+        // Set the scene for the stage
+        stage.setScene(new Scene(homePage));
+
+        // Optionally, you can set the title for the stage if needed
+        // stage.setTitle("Home Page");
+
+        // Display the stage
+        stage.show();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
     }
 
-    @FXML
-    private void searchButtonAction() {
-        // Code to handle the search action
-        System.out.println("Search clicked.");
-
-        String searchValue = searchID.getText();
-        System.out.println("Searching for Patient ID: " + searchValue);
-
-        // Implement the logic to search in the TableView or fetch from the database based on the searchValue.
-    }
 
     // Initialization method
     @FXML

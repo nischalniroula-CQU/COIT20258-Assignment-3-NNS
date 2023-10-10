@@ -13,20 +13,36 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextArea;
 
 public class ViewPatientsController implements Initializable {
 
+// Define the UI components
     @FXML
     private Button cancelButton;
 
     @FXML
-    private TableView<?> patientsTable;
-
+    private TextArea patientID;
     @FXML
-    private TextField searchID;
-
+    private TextArea firstNameID;
     @FXML
-    private Button searchButton;
+    private TextArea lastNameID;
+    @FXML
+    private TextArea dobID;
+    @FXML
+    private TextArea genderID;
+    @FXML
+    private TextArea bloodGroupID;
+    @FXML
+    private TextArea departmentID;
+    @FXML
+    private TextArea heightID;
+    @FXML
+    private TextArea weightID;
+    @FXML
+    private TextArea bloodPressureID;
+    @FXML
+    private TextArea bmiID;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -56,13 +72,4 @@ public class ViewPatientsController implements Initializable {
     }
     }
 
-    @FXML
-    private void searchButtonAction() {
-        // Logic to search for a patient by ID
-        String patientId = searchID.getText();
-
-        // Now, use the patientId to query your database or perform search on your data structure
-        
-        // Update the patientsTable with the search results
-    }
 }

@@ -43,9 +43,23 @@ public class HomePageController {
 
     @FXML
     private void handleLogoutButtonAction(ActionEvent event) {
+                           try {
+        // Load the login page
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Login Page.fxml"));
+        Parent loginPage = loader.load();
+
+        // Get the current stage using any component (e.g., the cancel button)
         Stage stage = (Stage) logoutButtonId.getScene().getWindow();
-        stage.close();
-        System.out.println("Logout Button Pressed");
+
+        // Set the scene for the stage
+        stage.setScene(new Scene(loginPage));
+
+ 
+        // Display the stage
+        stage.show();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
     }
 
     @FXML
