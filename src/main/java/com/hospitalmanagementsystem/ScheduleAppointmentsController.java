@@ -13,8 +13,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Alert;
@@ -45,7 +53,7 @@ public class ScheduleAppointmentsController implements Initializable {
 
     @FXML
     private Button submitButton;
-    
+
     // Database connection
     private ConnectionClass connectionClass = new ConnectionClass();
     String[] times = {"09:00 AM", "10:00 AM", "11:00 AM", "01:00 PM", "02:00 PM"};
@@ -55,68 +63,86 @@ public class ScheduleAppointmentsController implements Initializable {
         // Initialize your components here
 
         // For example, populate timeChoiceBox
-        timeChoiceBox.getItems().addAll(times);
-
         // Populate bloodGroupChoiceBox
         bloodGroupChoiceBox.getItems().addAll("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-");
 
         // Populate DepartmentChoiceBox
         DepartmentChoiceBox.getItems().addAll("Cardiology", "Neurology", "Orthopedics", "Dermatology", "Emergency");
         datePicker.setDayCellFactory(picker -> new DateCell() {
-        public void updateItem(LocalDate date, boolean empty) {
-            super.updateItem(date, empty);
-            LocalDate today = LocalDate.now();
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                LocalDate today = LocalDate.now();
 
-            setDisable(empty || date.compareTo(today) < 1 );
-        }
-    });
+                setDisable(empty || date.compareTo(today) < 1);
+            }
+        });
         timeChoiceBox.setDisable(true);
         DepartmentChoiceBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-      @Override
-      public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2) {
-          if (datePicker.getValue() != null) {
-              timeChoiceBox.setDisable(false);
-          }
-      }
-    });
-        
-        datePicker.setOnAction(event -> 
-    {
-        String department = DepartmentChoiceBox.getSelectionModel().getSelectedItem();
-        if (department != null) {
-            timeChoiceBox.setDisable(false);
-        }
-        
-    });
-    }    
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2) {
+                String date = (datePicker.getValue() != null) ? datePicker.getValue().toString() : null;
+                if (date != null) {
+                    timeChoiceBox.getItems().clear();
+                    timeChoiceBox.setDisable(false);
+                    String department = DepartmentChoiceBox.getItems().get((Integer) number2);
+                    List<String> alreadySelectedTime = fetchTimesInDatabase(date, department);
+
+                    List<String> newTimes = Arrays.asList(times);
+                    if (alreadySelectedTime.size() != newTimes.size()) {
+                        if (alreadySelectedTime != null) {
+                            newTimes = newTimes.stream()
+                                    .filter(element -> !alreadySelectedTime.contains(element))
+                                    .collect(Collectors.toList());
+                        }
+                        timeChoiceBox.getItems().addAll(newTimes);
+                    } else {
+                        timeChoiceBox.setDisable(true);
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Time unavaible please select another date.");
+                        alert.showAndWait();
+                    }
+                }
+            }
+        });
+
+        datePicker.setOnAction(event
+                -> {
+            String department = DepartmentChoiceBox.getSelectionModel().getSelectedItem();
+            if (department != null) {
+                timeChoiceBox.setDisable(false);
+            }
+
+        });
+    }
 
     @FXML
     private void cancelButtonAction() {
-                   try {
-        // Load the home page
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("HomePage.fxml"));
-        Parent homePage = loader.load();
+        try {
+            // Load the home page
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("HomePage.fxml"));
+            Parent homePage = loader.load();
 
-        // Get the current stage using any component (e.g., the cancel button)
-        Stage stage = (Stage) cancelButton.getScene().getWindow();
+            // Get the current stage using any component (e.g., the cancel button)
+            Stage stage = (Stage) cancelButton.getScene().getWindow();
 
-        // Set the scene for the stage
-        stage.setScene(new Scene(homePage));
+            // Set the scene for the stage
+            stage.setScene(new Scene(homePage));
 
-        // Optionally, you can set the title for the stage if needed
-        // stage.setTitle("Home Page");
-
-        // Display the stage
-        stage.show();
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
+            // Optionally, you can set the title for the stage if needed
+            // stage.setTitle("Home Page");
+            // Display the stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     private void submitButtonAction() {
         // Handle the submission logic here
-        
+
         String firstName = firstNameID.getText();
         String lastName = lastNameID.getText();
         String date = (datePicker.getValue() != null) ? datePicker.getValue().toString() : null;
@@ -127,33 +153,63 @@ public class ScheduleAppointmentsController implements Initializable {
         // You can now use the data for your desired purpose, like saving to a database or other services.
 
         // After the appointment has been scheduled, you might want to close the window or navigate to a different page.
-        
-        try {
-            String query = "INSERT INTO schedules (first_name, last_name, date, time, blood_group, department) VALUES (?, ?, ?, ?, ?, ?)";
-            PreparedStatement preparedStatement = connectionClass.con.prepareStatement(query);
-            preparedStatement.setString(1, firstName);
-            preparedStatement.setString(2, lastName);
-            preparedStatement.setString(3, date);
-            preparedStatement.setString(4, time);
-            preparedStatement.setString(5, bloodGroup);
-            preparedStatement.setString(6, department);
+        if (firstName == null || lastName == null || date == null || time == null || bloodGroup == null || department == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("All field must be filled.");
+            alert.showAndWait();
+        } else {
+            try {
+                String query = "INSERT INTO schedules (first_name, last_name, date, time, blood_group, department) VALUES (?, ?, ?, ?, ?, ?)";
+                PreparedStatement preparedStatement = connectionClass.con.prepareStatement(query);
+                preparedStatement.setString(1, firstName);
+                preparedStatement.setString(2, lastName);
+                preparedStatement.setString(3, date);
+                preparedStatement.setString(4, time);
+                preparedStatement.setString(5, bloodGroup);
+                preparedStatement.setString(6, department);
 
-            int result = preparedStatement.executeUpdate();
+                int result = preparedStatement.executeUpdate();
 
-            if (result == 1) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Success");
-                alert.setHeaderText(null);
-                alert.setContentText("Schedule appointment  successfully!");
-                alert.showAndWait();
-                cancelButtonAction(); // Close the window after successful registration
-            } else {
+                if (result == 1) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Success");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Schedule appointment  successfully!");
+                    alert.showAndWait();
+                    cancelButtonAction(); // Close the window after successful registration
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Failed to schedule appointment. Please try again using different time.");
+                    alert.showAndWait();
+                }
+            } catch (Exception e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setHeaderText(null);
-                alert.setContentText("Failed to schedule appointment. Please try again using different time.");
+                alert.setContentText("An error occurred: " + e.getMessage());
                 alert.showAndWait();
             }
+        }
+    }
+
+    public List<String> fetchTimesInDatabase(String date, String department) {
+
+        try {
+            String query = "SELECT * FROM schedules WHERE date = ? AND department = ?";
+            List<String> times = new ArrayList<>();
+            PreparedStatement preparedStatement = connectionClass.con.prepareStatement(query);
+            preparedStatement.setString(1, date);
+            preparedStatement.setString(2, department);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String time = resultSet.getString("time");
+                times.add(time);
+            }
+            return times;
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -161,5 +217,6 @@ public class ScheduleAppointmentsController implements Initializable {
             alert.setContentText("An error occurred: " + e.getMessage());
             alert.showAndWait();
         }
+        return null;
     }
 }
