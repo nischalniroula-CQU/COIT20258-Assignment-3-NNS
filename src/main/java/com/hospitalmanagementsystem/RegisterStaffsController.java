@@ -64,7 +64,7 @@ public class RegisterStaffsController {
         // Do similar for other fields and handle the submission logic.
         
         try {
-            String query = "INSERT INTO staffs (staff_id, first_name, last_name, email, phone_number, address, gender, blood_group, department, date_of_birth) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO staffs (staff_id, first_name, last_name, email, phone_number, address, gender, blood_group, department, date_of_birth, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = connectionClass.con.prepareStatement(query);
             preparedStatement.setString(1, staffID.getText());
             preparedStatement.setString(2, firstNameID.getText());
@@ -76,6 +76,10 @@ public class RegisterStaffsController {
             preparedStatement.setString(8, bloodGroupChoiceBox.getValue());
             preparedStatement.setString(9, DepartmentChoiceBox.getValue());
             preparedStatement.setDate(10, java.sql.Date.valueOf(dobPicker.getValue()));
+            
+            // Setting the password as a combination of phone number and staff ID
+            String password = phoneNumberID.getText() + staffID.getText();
+            preparedStatement.setString(11, password);
 
             int result = preparedStatement.executeUpdate();
 

@@ -18,7 +18,7 @@ public class ConnectionClass {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             // Establish a connection to the MySQL server without specifying a database
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/?serverTimezone=UTC", "root", "P@tan123");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/?serverTimezone=UTC", "root", "root");
             stm = con.createStatement();
 
             // Check if the database 'hospital_db' exists
