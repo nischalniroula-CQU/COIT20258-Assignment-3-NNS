@@ -18,7 +18,7 @@ public class ConnectionClass {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             // Establish a connection to the MySQL server without specifying a database
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/?serverTimezone=UTC", "root", "root");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/?serverTimezone=UTC", "root", "password");
             stm = con.createStatement();
 
             // Check if the database 'hospital_db' exists
@@ -39,6 +39,9 @@ public class ConnectionClass {
                 // Create the staffs table
                 
                 createStaffsTable();
+                
+                //Create the schedules table
+                createSchedulesTable();
 
             } else {
                 // If 'hospital_db' exists, switch to it
@@ -57,8 +60,17 @@ public class ConnectionClass {
                if (!tableCheck.next()) {
                // Create the 'staffs' table if it doesn't exist
                createStaffsTable();
-} 
+                } 
+               
+               //Check if the 'schedules' table exists in 'hospital_db'
+               tableCheck = stm.executeQuery("SHOW TABLES LIKE 'schedules'");
+               if (!tableCheck.next()) {
+               // Create the 'staffs' table if it doesn't exist
+               createSchedulesTable();
+                } 
             }
+            
+            
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -75,7 +87,7 @@ public class ConnectionClass {
     
     private void createPatientsTable() throws SQLException {
     String createTableSQL = "CREATE TABLE patients ("
-            + "patient_id VARCHAR(255) PRIMARY KEY AUTO_INCREMENT,"
+            + "patient_id VARCHAR(255) PRIMARY KEY,"
             + "first_name VARCHAR(255) NOT NULL,"
             + "last_name VARCHAR(255) NOT NULL,"
             + "date_of_birth DATE NOT NULL,"
@@ -88,7 +100,7 @@ public class ConnectionClass {
     
     private void createStaffsTable() throws SQLException {
     String createTableSQL = "CREATE TABLE staffs ("
-            + "staff_id VARCHAR(255) PRIMARY KEY AUTO_INCREMENT,"
+            + "staff_id VARCHAR(255) PRIMARY KEY,"
             + "first_name VARCHAR(255) NOT NULL,"
             + "last_name VARCHAR(255) NOT NULL,"
             + "email VARCHAR(255),"
@@ -101,5 +113,19 @@ public class ConnectionClass {
             + ")";
     stm.executeUpdate(createTableSQL);
     }
+    
+    private void createSchedulesTable() throws SQLException {
+    String createTableSQL = "CREATE TABLE schedules ("
+            + "schedule_id INT PRIMARY KEY AUTO_INCREMENT,"
+            + "first_name VARCHAR(255) NOT NULL,"
+            + "last_name VARCHAR(255) NOT NULL,"
+            + "date DATE NOT NULL,"
+            + "time VARCHAR(10) NOT NULL,"
+            + "blood_group ENUM('A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-') NOT NULL,"
+            + "department ENUM('Cardiology', 'Neurology', 'Orthopedics', 'Dermatology', 'Emergency') NOT NULL"
+            + ")";
+    stm.executeUpdate(createTableSQL);
+}
+
 
 }
