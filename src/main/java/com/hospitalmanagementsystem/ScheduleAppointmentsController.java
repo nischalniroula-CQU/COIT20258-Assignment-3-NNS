@@ -85,9 +85,29 @@ public class ScheduleAppointmentsController implements Initializable {
                     timeChoiceBox.getItems().clear();
                     timeChoiceBox.setDisable(false);
                     String department = DepartmentChoiceBox.getItems().get((Integer) number2);
-                    List<String> alreadySelectedTime = fetchTimesInDatabase(date, department);
+                    updateTime(date, department);
+                }
+            }
+        });
+        
 
-                    List<String> newTimes = Arrays.asList(times);
+        datePicker.setOnAction(event
+                -> {
+            String department = DepartmentChoiceBox.getSelectionModel().getSelectedItem();
+            if (department != null) {
+                timeChoiceBox.getItems().clear();
+                timeChoiceBox.setDisable(false);
+                String date = (datePicker.getValue() != null) ? datePicker.getValue().toString() : null;
+                updateTime(date, department);
+            }
+
+        });
+    }
+    
+    
+        private void updateTime(String date, String department) {
+            List<String> alreadySelectedTime = fetchTimesInDatabase(date, department);
+            List<String> newTimes = Arrays.asList(times);
                     if (alreadySelectedTime.size() != newTimes.size()) {
                         if (alreadySelectedTime != null) {
                             newTimes = newTimes.stream()
@@ -103,19 +123,7 @@ public class ScheduleAppointmentsController implements Initializable {
                         alert.setContentText("Time unavaible please select another date.");
                         alert.showAndWait();
                     }
-                }
-            }
-        });
-
-        datePicker.setOnAction(event
-                -> {
-            String department = DepartmentChoiceBox.getSelectionModel().getSelectedItem();
-            if (department != null) {
-                timeChoiceBox.setDisable(false);
-            }
-
-        });
-    }
+        }
 
     @FXML
     private void cancelButtonAction() {
