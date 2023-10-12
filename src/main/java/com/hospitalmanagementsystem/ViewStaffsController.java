@@ -134,11 +134,13 @@ public class ViewStaffsController {
     String emailValue = emailID.getText();
     String addressValue = addressID.getText();
     String roleValue = roleID.getText();
+    String updatedPassword = phoneNumberID.getText() + staffID.getText();
+    String updatedUsername = firstNameValue + lastNameValue;
 
     // Use prepared statements to update the database
     ConnectionClass connectionClass = new ConnectionClass();
     Connection connection = connectionClass.con;
-    String sql = "UPDATE staffs SET first_name = ?, last_name = ?, email = ?, phone_number = ?, address = ?, gender = ?, blood_group = ?, department = ?, date_of_birth = ?, role = ? WHERE staff_id = ?";
+    String sql = "UPDATE staffs SET first_name = ?, last_name = ?, email = ?, phone_number = ?, address = ?, gender = ?, blood_group = ?, department = ?, date_of_birth = ?, role = ?, username = ?, password = ? WHERE staff_id = ?";
 
     try {
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -152,7 +154,9 @@ public class ViewStaffsController {
         preparedStatement.setString(8, departmentValue);
         preparedStatement.setString(9, dobValue);
         preparedStatement.setString(10, roleValue);
-        preparedStatement.setString(11, staffIDValue);
+        preparedStatement.setString(11, updatedUsername);
+        preparedStatement.setString(12, updatedPassword);
+        preparedStatement.setString(13, staffIDValue);
 
         int affectedRows = preparedStatement.executeUpdate();
         if (affectedRows == 0) {
