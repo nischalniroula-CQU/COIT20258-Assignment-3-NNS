@@ -75,7 +75,7 @@ public class LoginPageController implements Initializable {
         stage.close();
     }
 
-    /*private boolean authenticate(String username, String password, String role) {
+    private boolean authenticate(String username, String password, String role) {
         try {
             String query = "SELECT * FROM staffs WHERE username=? AND password=? AND role=?";
             PreparedStatement preparedStatement = connectionClass.con.prepareStatement(query);
@@ -88,10 +88,10 @@ public class LoginPageController implements Initializable {
             e.printStackTrace();
             return false;
         }
-    }*/
+    }
     
     
-    private boolean authenticate(String username, String password, String role) {
+    /*private boolean authenticate(String username, String password, String role) {
         // Basic authentication for demonstration purposes
         if ("Admin".equals(role) && "admin".equals(username) && "admin123".equals(password)) {
             return true;
@@ -99,7 +99,7 @@ public class LoginPageController implements Initializable {
             return true;
         }
         return false;
-    }
+    }*/
     
 
     private String getHomePageForRole(String role) {

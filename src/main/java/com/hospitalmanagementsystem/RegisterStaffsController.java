@@ -64,7 +64,7 @@ public class RegisterStaffsController {
         // Do similar for other fields and handle the submission logic.
         
         try {
-            String query = "INSERT INTO staffs (staff_id, first_name, last_name, email, phone_number, address, gender, blood_group, department, date_of_birth, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO staffs (staff_id, first_name, last_name, email, phone_number, address, gender, blood_group, department, date_of_birth, password, username) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = connectionClass.con.prepareStatement(query);
             preparedStatement.setString(1, staffID.getText());
             preparedStatement.setString(2, firstNameID.getText());
@@ -80,6 +80,10 @@ public class RegisterStaffsController {
             // Setting the password as a combination of phone number and staff ID
             String password = phoneNumberID.getText() + staffID.getText();
             preparedStatement.setString(11, password);
+            
+            // Setting the username as a combination of first name and last name
+            String username = firstNameID.getText() + lastNameID.getText();
+            preparedStatement.setString(12, username);
 
             int result = preparedStatement.executeUpdate();
 
