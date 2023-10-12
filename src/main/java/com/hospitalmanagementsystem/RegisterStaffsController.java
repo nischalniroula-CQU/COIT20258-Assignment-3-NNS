@@ -36,6 +36,8 @@ public class RegisterStaffsController {
     private ChoiceBox<String> bloodGroupChoiceBox;
     @FXML
     private ChoiceBox<String> DepartmentChoiceBox;
+    @FXML
+    private ChoiceBox<String> staffRoleChoiceBox;
 
     // DatePicker
     @FXML
@@ -64,7 +66,7 @@ public class RegisterStaffsController {
         // Do similar for other fields and handle the submission logic.
         
         try {
-            String query = "INSERT INTO staffs (staff_id, first_name, last_name, email, phone_number, address, gender, blood_group, department, date_of_birth, password, username) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO staffs (staff_id, first_name, last_name, email, phone_number, address, gender, blood_group, department, date_of_birth, password, username, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = connectionClass.con.prepareStatement(query);
             preparedStatement.setString(1, staffID.getText());
             preparedStatement.setString(2, firstNameID.getText());
@@ -84,6 +86,8 @@ public class RegisterStaffsController {
             // Setting the username as a combination of first name and last name
             String username = firstNameID.getText() + lastNameID.getText();
             preparedStatement.setString(12, username);
+            
+            preparedStatement.setString(13, staffRoleChoiceBox.getValue());
 
             int result = preparedStatement.executeUpdate();
 
@@ -119,5 +123,6 @@ public class RegisterStaffsController {
         genderChoiceBox.getItems().addAll("Male", "Female", "Other");
         bloodGroupChoiceBox.getItems().addAll("A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-");
         DepartmentChoiceBox.getItems().addAll("Cardiology", "Neurology", "Administration", "Radiology");
+        staffRoleChoiceBox.getItems().addAll("Admin", "Staff");
     }
 }
