@@ -1,8 +1,10 @@
 package com.hospitalmanagementsystem;
 
 import java.io.IOException;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -60,17 +62,30 @@ public class AdminHomePageController {
     }
 
     @FXML
-    private void handleViewStaffsButtonAction() {
+    private void handleViewStaffsButtonAction(ActionEvent event) {
         // Code to handle viewing staffs action
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("ViewStaffs.fxml"));
-            Stage stage = new Stage();
-            stage.setTitle("View Staffs");
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    try {
+        // Load the SearchPatientID.fxml content
+        Parent searchStaffContent = FXMLLoader.load(getClass().getResource("SearchStaffID.fxml"));
+
+        // Create a new scene with the loaded content
+        Scene searchPatientScene = new Scene(searchStaffContent);
+
+        // Create a new stage to display the search patient content
+        Stage searchPatientStage = new Stage();
+        searchPatientStage.setScene(searchPatientScene);
+
+        
+        searchPatientStage.initOwner(((Node) (event.getSource())).getScene().getWindow()); // Set the owner of the new window to the current window
+
+        // Display the new stage
+        searchPatientStage.show();
+
+    } catch (IOException e) {
+        e.printStackTrace();
+        System.out.println("Error loading SearchPatientID.fxml");
+        // Handle the exception (show an alert or log the error)
+    }
     }
 
     @FXML

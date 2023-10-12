@@ -119,30 +119,33 @@ public class HomePageController {
     
     }
 
-    @FXML
-    private void handleViewPatientsButtonAction(ActionEvent event) {
-             try {
-            // Load the Register.fxml content
-            Parent registerContent = FXMLLoader.load(getClass().getResource("/com/hospitalmanagementsystem/ViewPatients.fxml"));
+@FXML
+private void handleViewPatientsButtonAction(ActionEvent event) {
+    try {
+        // Load the SearchPatientID.fxml content
+        Parent searchPatientContent = FXMLLoader.load(getClass().getResource("SearchPatientID.fxml"));
 
+        // Create a new scene with the loaded content
+        Scene searchPatientScene = new Scene(searchPatientContent);
 
-            // Create a new scene with the loaded content
-            Scene registerScene = new Scene(registerContent);
+        // Create a new stage to display the search patient content
+        Stage searchPatientStage = new Stage();
+        searchPatientStage.setScene(searchPatientScene);
 
-            // Display in a new window (Stage)
-            Stage registerStage = new Stage();
-            registerStage.setScene(registerScene);
-            registerStage.show();
+        
+        searchPatientStage.initOwner(((Node) (event.getSource())).getScene().getWindow()); // Set the owner of the new window to the current window
 
-            //If you want to close the current window after opening the new one:
-            ((Node) (event.getSource())).getScene().getWindow().hide();
+        // Display the new stage
+        searchPatientStage.show();
 
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Error loading Register.fxml");
-            // Handle the exception (show an alert or log the error)
-        }
+    } catch (IOException e) {
+        e.
+                printStackTrace();
+        System.out.println("Error loading SearchPatientID.fxml");
+        // Handle the exception (show an alert or log the error)
     }
+}
+
 
     @FXML
     private void handleBillingsButtonAction(ActionEvent event) {

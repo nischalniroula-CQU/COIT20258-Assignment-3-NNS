@@ -20,7 +20,7 @@
       </Label>
       <Group layoutX="39.0" layoutY="108.0" />
       <Button fx:id="cancelButtonID" layoutX="38.0" layoutY="142.0" mnemonicParsing="false" onAction="#handleCancelButtonAction" prefHeight="25.0" prefWidth="66.0" text="Cancel" />
-      <TextField fx:id="patientID" layoutX="38.0" layoutY="103.0" prefHeight="25.0" prefWidth="177.0" promptText="Staff ID" />
+      <TextField fx:id="staffID" layoutX="38.0" layoutY="103.0" prefHeight="25.0" prefWidth="177.0" promptText="Staff ID" />
       <ImageView fitHeight="91.0" fitWidth="93.0" layoutX="276.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/team.png" />

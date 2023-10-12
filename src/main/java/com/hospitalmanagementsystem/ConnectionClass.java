@@ -18,7 +18,7 @@ public class ConnectionClass {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             // Establish a connection to the MySQL server without specifying a database
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/?serverTimezone=UTC", "root", "root");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/?serverTimezone=UTC", "root", "password");
             stm = con.createStatement();
 
             // Check if the database 'hospital_db' exists
@@ -103,7 +103,7 @@ private void createPatientsTable() throws SQLException {
 }
 
     
-    private void createStaffsTable() throws SQLException {
+private void createStaffsTable() throws SQLException {
     String createTableSQL = "CREATE TABLE staffs ("
             + "staff_id VARCHAR(255) PRIMARY KEY,"
             + "first_name VARCHAR(255) NOT NULL,"
@@ -111,13 +111,17 @@ private void createPatientsTable() throws SQLException {
             + "email VARCHAR(255),"
             + "phone_number VARCHAR(20),"
             + "address TEXT,"
-            + "gender ENUM('Male', 'Female', 'Other') NOT NULL,"
-            + "blood_group ENUM('A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-') NOT NULL,"
-            + "department ENUM('Cardiology', 'Neurology', 'Administration', 'Radiology') NOT NULL,"
-            + "date_of_birth DATE NOT NULL"
+            + "gender VARCHAR(10) NOT NULL CHECK (gender IN ('Male', 'Female', 'Other')),"   // Modified to VARCHAR with CHECK constraint
+            + "blood_group VARCHAR(10) NOT NULL CHECK (blood_group IN ('A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-')),"  // Modified to VARCHAR with CHECK constraint
+            + "department VARCHAR(20) NOT NULL CHECK (department IN ('Cardiology', 'Neurology', 'Administration', 'Radiology')),"  // Modified to VARCHAR with CHECK constraint
+            + "date_of_birth DATE NOT NULL,"
+            + "password VARCHAR(255),"   // Added password column
+            + "username VARCHAR(255),"   // Added username column
+            + "role VARCHAR(20) NOT NULL CHECK (role IN ('Admin', 'Staff'))"  // Added role column
             + ")";
     stm.executeUpdate(createTableSQL);
-    }
+}
+
     
     private void createSchedulesTable() throws SQLException {
     String createTableSQL = "CREATE TABLE schedules ("
