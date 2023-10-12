@@ -122,7 +122,7 @@ public class RegisterStaffsController {
         // For example, populate ChoiceBoxes with default values:
         genderChoiceBox.getItems().addAll("Male", "Female", "Other");
         bloodGroupChoiceBox.getItems().addAll("A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-");
-        DepartmentChoiceBox.getItems().addAll("Cardiology", "Neurology", "Administration", "Radiology");
+        DepartmentChoiceBox.getItems().addAll("Administration","Cardiology", "Neurology", "Orthopedics", "Dermatology", "Emergency");
         staffRoleChoiceBox.getItems().addAll("Admin", "Staff");
     }
 }

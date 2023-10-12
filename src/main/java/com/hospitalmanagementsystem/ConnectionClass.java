@@ -94,7 +94,7 @@ private void createPatientsTable() throws SQLException {
             + "gender ENUM('Male', 'Female', 'Other') NOT NULL,"
             + "blood_group ENUM('A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-') NOT NULL,"
             + "department ENUM('Cardiology', 'Neurology', 'Orthopedics', 'Dermatology', 'Emergency') NOT NULL,"
-            + "height DECIMAL(4,2),"
+            + "height DOUBLE(5,2),"
             + "weight DECIMAL(4,2),"
             + "blood_pressure VARCHAR(7),"
             + "bmi DECIMAL(4,2)"
@@ -111,16 +111,35 @@ private void createStaffsTable() throws SQLException {
             + "email VARCHAR(255),"
             + "phone_number VARCHAR(20),"
             + "address TEXT,"
-            + "gender VARCHAR(10) NOT NULL CHECK (gender IN ('Male', 'Female', 'Other')),"   // Modified to VARCHAR with CHECK constraint
-            + "blood_group VARCHAR(10) NOT NULL CHECK (blood_group IN ('A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-')),"  // Modified to VARCHAR with CHECK constraint
-            + "department VARCHAR(20) NOT NULL CHECK (department IN ('Cardiology', 'Neurology', 'Administration', 'Radiology')),"  // Modified to VARCHAR with CHECK constraint
+            + "gender VARCHAR(10) NOT NULL CHECK (gender IN ('Male', 'Female', 'Other')),"
+            + "blood_group VARCHAR(10) NOT NULL CHECK (blood_group IN ('A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-')),"
+            + "department VARCHAR(20) NOT NULL CHECK (department IN ('Cardiology', 'Neurology', 'Administration', 'Radiology')),"
             + "date_of_birth DATE NOT NULL,"
-            + "password VARCHAR(255),"   // Added password column
-            + "username VARCHAR(255),"   // Added username column
-            + "role VARCHAR(20) NOT NULL CHECK (role IN ('Admin', 'Staff'))"  // Added role column
+            + "password VARCHAR(255),"
+            + "username VARCHAR(255),"
+            + "role VARCHAR(20) NOT NULL CHECK (role IN ('Admin', 'Staff'))"
             + ")";
+    
     stm.executeUpdate(createTableSQL);
+
+    // Inserting the sample data
+    String insertSampleDataSQL = "INSERT INTO staffs (staff_id, first_name, last_name, username, password, role, gender, blood_group, department, date_of_birth) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    PreparedStatement preparedStatement = stm.getConnection().prepareStatement(insertSampleDataSQL);
+    
+    preparedStatement.setString(1, "ADM001"); // Sample staff_id for the admin. You can change it as needed.
+    preparedStatement.setString(2, "Admin"); // Sample first name for the admin
+    preparedStatement.setString(3, "Admin"); // Sample last name for the admin
+    preparedStatement.setString(4, "admin"); // username
+    preparedStatement.setString(5, "adminpassword"); // password
+    preparedStatement.setString(6, "Admin"); // role
+    preparedStatement.setString(7, "Male"); // gender
+    preparedStatement.setString(8, "O+"); // blood group
+    preparedStatement.setString(9, "Administration"); // department
+    preparedStatement.setDate(10, java.sql.Date.valueOf("2000-01-01")); // Sample date of birth for the admin
+
+    preparedStatement.executeUpdate();
 }
+
 
     
     private void createSchedulesTable() throws SQLException {

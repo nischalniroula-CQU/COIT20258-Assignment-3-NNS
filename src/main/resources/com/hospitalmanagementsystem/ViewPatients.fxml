@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane stylesheets="@styles.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hospitalmanagementsystem.ViewPatientsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hospitalmanagementsystem.ViewPatientsController">
    <children>
       <ImageView fitHeight="58.0" fitWidth="133.0" layoutX="26.0" layoutY="715.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -95,5 +95,10 @@
             <TextArea fx:id="bmiID" layoutX="443.0" layoutY="248.0" prefHeight="23.0" prefWidth="200.0" />
          </children>
       </Group>
+      <Button fx:id="editButtonID" layoutX="1077.0" layoutY="663.0" mnemonicParsing="false" onAction="#editButtonAction" prefHeight="23.0" prefWidth="77.0" text="Edit">
+         <font>
+            <Font name="Raleway" size="13.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

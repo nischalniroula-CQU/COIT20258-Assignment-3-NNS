@@ -92,7 +92,7 @@ public class AdminHomePageController {
     private void handlereportButtonAction() {
         // Code to handle report & analytics action
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("AdminReport.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("ViewReport.fxml"));
             Stage stage = new Stage();
             stage.setTitle("Reports & Analytics");
             stage.setScene(new Scene(root));
