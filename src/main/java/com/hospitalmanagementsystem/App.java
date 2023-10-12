@@ -11,13 +11,23 @@ import java.io.IOException;
 /**
  * JavaFX App
  */
-//test commit again
 public class App extends Application {
 
     private static Scene scene;
+    private ConnectionClass connectionClass;
 
     @Override
     public void start(Stage stage) throws IOException {
+        // Initialize the database connection here.
+        try {
+            connectionClass = new ConnectionClass();
+        } catch(Exception e) {
+            e.printStackTrace();
+            System.out.println("Could not establish a connection to the database!");
+            // Optionally: Show an error message to the user and exit the application.
+            System.exit(1);
+        }
+
         scene = new Scene(loadFXML("Login Page"), 600, 400);
         stage.setScene(scene);
         stage.show();
@@ -35,5 +45,4 @@ public class App extends Application {
     public static void main(String[] args) {
         launch();
     }
-
 }

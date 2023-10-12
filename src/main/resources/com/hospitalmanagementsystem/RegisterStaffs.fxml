@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane stylesheets="@styles.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hospitalmanagementsystem.RegisterStaffsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hospitalmanagementsystem.RegisterStaffsController">
    <children>
       <ImageView fitHeight="58.0" fitWidth="133.0" layoutX="26.0" layoutY="715.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -97,5 +97,11 @@
          </font>
       </Label>
       <TextField fx:id="addressID" layoutX="142.0" layoutY="406.0" />
+      <Label layoutX="379.0" layoutY="139.0" text="Role:" textFill="#2986c3">
+         <font>
+            <Font name="Raleway" size="13.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="staffRoleChoiceBox" layoutX="482.0" layoutY="134.0" prefHeight="25.0" prefWidth="161.0" />
    </children>
 </AnchorPane>
