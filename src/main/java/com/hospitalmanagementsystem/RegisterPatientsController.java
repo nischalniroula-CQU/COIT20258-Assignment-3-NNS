@@ -48,6 +48,18 @@ public class RegisterPatientsController {
 
     @FXML
     private Button submitButton;
+    
+    @FXML
+    private TextField heightID;
+
+    @FXML
+    private TextField weightID;
+
+    @FXML
+    private TextField bloodPressureID;
+
+    @FXML
+    private TextField bmiID;
 
     @FXML
     public void initialize() {
@@ -91,15 +103,19 @@ public class RegisterPatientsController {
         // Handle the submit button logic here.
 
         try {
-            String query = "INSERT INTO patients (patient_id, first_name, last_name, date_of_birth, gender, blood_group, department) VALUES (?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement preparedStatement = connectionClass.con.prepareStatement(query);
-            preparedStatement.setString(1, patientID.getText());
-            preparedStatement.setString(2, firstNameID.getText());
-            preparedStatement.setString(3, lastNameID.getText());
-            preparedStatement.setDate(4, java.sql.Date.valueOf(dobPicker.getValue()));
-            preparedStatement.setString(5, genderChoiceBox.getValue());
-            preparedStatement.setString(6, bloodGroupChoiceBox.getValue());
-            preparedStatement.setString(7, DepartmentChoiceBox1.getValue());
+        String query = "INSERT INTO patients (patient_id, first_name, last_name, date_of_birth, gender, blood_group, department, height, weight, blood_pressure, bmi) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        PreparedStatement preparedStatement = connectionClass.con.prepareStatement(query);
+        preparedStatement.setString(1, patientID.getText());
+        preparedStatement.setString(2, firstNameID.getText());
+        preparedStatement.setString(3, lastNameID.getText());
+        preparedStatement.setDate(4, java.sql.Date.valueOf(dobPicker.getValue()));
+        preparedStatement.setString(5, genderChoiceBox.getValue());
+        preparedStatement.setString(6, bloodGroupChoiceBox.getValue());
+        preparedStatement.setString(7, DepartmentChoiceBox1.getValue());
+        preparedStatement.setFloat(8, Float.parseFloat(heightID.getText()));
+        preparedStatement.setFloat(9, Float.parseFloat(weightID.getText()));
+        preparedStatement.setString(10, bloodPressureID.getText());
+        preparedStatement.setFloat(11, Float.parseFloat(bmiID.getText()));
 
             int result = preparedStatement.executeUpdate();
 

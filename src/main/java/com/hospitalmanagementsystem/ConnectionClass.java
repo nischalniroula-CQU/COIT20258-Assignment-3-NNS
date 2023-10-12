@@ -85,7 +85,7 @@ public class ConnectionClass {
         new ConnectionClass();
     }
     
-    private void createPatientsTable() throws SQLException {
+private void createPatientsTable() throws SQLException {
     String createTableSQL = "CREATE TABLE patients ("
             + "patient_id VARCHAR(255) PRIMARY KEY,"
             + "first_name VARCHAR(255) NOT NULL,"
@@ -93,10 +93,15 @@ public class ConnectionClass {
             + "date_of_birth DATE NOT NULL,"
             + "gender ENUM('Male', 'Female', 'Other') NOT NULL,"
             + "blood_group ENUM('A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-') NOT NULL,"
-            + "department ENUM('Cardiology', 'Neurology', 'Orthopedics', 'Dermatology', 'Emergency') NOT NULL"
+            + "department ENUM('Cardiology', 'Neurology', 'Orthopedics', 'Dermatology', 'Emergency') NOT NULL,"
+            + "height DECIMAL(4,2),"
+            + "weight DECIMAL(4,2),"
+            + "blood_pressure VARCHAR(7),"
+            + "bmi DECIMAL(4,2)"
             + ")";
     stm.executeUpdate(createTableSQL);
-    }
+}
+
     
     private void createStaffsTable() throws SQLException {
     String createTableSQL = "CREATE TABLE staffs ("
