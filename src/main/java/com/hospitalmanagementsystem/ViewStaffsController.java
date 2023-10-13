@@ -69,13 +69,13 @@ public class ViewStaffsController {
     @FXML
     private void cancelButtonAction() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminHomePage.fxml"));
-            Parent homePage = loader.load();
-            Stage stage = (Stage) cancelButton.getScene().getWindow();
-            stage.setScene(new Scene(homePage));
-            stage.show();
+        // Get the current stage using the cancel button
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+
+        // Close the stage
+        stage.close();
         } catch (Exception e) {
-            e.printStackTrace();
+        e.printStackTrace();
         }
     }
     
