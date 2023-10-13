@@ -87,30 +87,39 @@ public class ViewReportController {
     }
 
     private void displayReportData() {
-        try (Statement stm = connection.createStatement()) {
+        try {
             // Get total number of registered patients
-            ResultSet rsPatients = stm.executeQuery("SELECT COUNT(*) FROM patients");
-            if (rsPatients.next()) {
-                registeredPatientsID.setText(String.valueOf(rsPatients.getInt(1)));
+            try (Statement stmPatients = connection.createStatement()) {
+                ResultSet rsPatients = stmPatients.executeQuery("SELECT COUNT(*) FROM patients");
+                if (rsPatients.next()) {
+                    registeredPatientsID.setText(String.valueOf(rsPatients.getInt(1)));
+                }
             }
 
             // Get total number of appointments
-            ResultSet rsAppointments = stm.executeQuery("SELECT COUNT(*) FROM schedules");
-            if (rsAppointments.next()) {
-                appointmentsID.setText(String.valueOf(rsAppointments.getInt(1)));
+            try (Statement stmAppointments = connection.createStatement()) {
+                ResultSet rsAppointments = stmAppointments.executeQuery("SELECT COUNT(*) FROM schedules");
+                if (rsAppointments.next()) {
+                    appointmentsID.setText(String.valueOf(rsAppointments.getInt(1)));
+                }
             }
 
             // Get total number of staff
-            ResultSet rsStaff = stm.executeQuery("SELECT COUNT(*) FROM staffs");
-            if (rsStaff.next()) {
-                registeredStaffsID.setText(String.valueOf(rsStaff.getInt(1)));
+            try (Statement stmStaff = connection.createStatement()) {
+                ResultSet rsStaff = stmStaff.executeQuery("SELECT COUNT(*) FROM staffs");
+                if (rsStaff.next()) {
+                    registeredStaffsID.setText(String.valueOf(rsStaff.getInt(1)));
+                }
             }
-
+            
+            
+            
             // Get total patients and staff by department
+        
             for (String department : new String[]{"Cardiology", "Neurology", "Orthopedics", "Dermatology", "Emergency", "Administration"}) {
-                ResultSet rsDepartmentPatients = stm.executeQuery("SELECT COUNT(*) FROM patients WHERE department = '" + department + "'");
-                ResultSet rsDepartmentStaffs = stm.executeQuery("SELECT COUNT(*) FROM staffs WHERE department = '" + department + "'");
-
+                try (Statement stmDepartment = connection.createStatement()) {
+                    ResultSet rsDepartmentPatients = stmDepartment.executeQuery("SELECT COUNT(*) FROM patients WHERE department = '" + department + "'");
+                    
                 if (rsDepartmentPatients.next()) {
                     switch (department) {
                         case "Cardiology":
@@ -134,6 +143,7 @@ public class ViewReportController {
                     }
                 }
 
+                ResultSet rsDepartmentStaffs = stmDepartment.executeQuery("SELECT COUNT(*) FROM staffs WHERE department = '" + department + "'");
                 if (rsDepartmentStaffs.next()) {
                     switch (department) {
                         case "Cardiology":
@@ -157,6 +167,7 @@ public class ViewReportController {
                     }
                 }
             }
+        }
 
         } catch (SQLException e) {
             e.printStackTrace();
