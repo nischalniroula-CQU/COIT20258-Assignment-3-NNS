@@ -1,6 +1,8 @@
 package com.hospitalmanagementsystem;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -49,23 +51,15 @@ public class RegisterStaffsController {
     @FXML
     private Button submitButton;
 
-    // Methods handling the button actions
     @FXML
     private void cancelButtonAction() {
-        // Code to handle cancel action
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
 
     @FXML
     private void submitButtonAction() {
-        
-        // Example of fetching input:
-        //String staffIDValue = staffID.getText();
-        //System.out.println("Staff ID: " + staffIDValue);
-        // Do similar for other fields and handle the submission logic.
-        
-        try {
+                try {
             String query = "INSERT INTO staffs (staff_id, first_name, last_name, email, phone_number, address, gender, blood_group, department, date_of_birth, password, username, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = connectionClass.con.prepareStatement(query);
             preparedStatement.setString(1, staffID.getText());
@@ -112,17 +106,36 @@ public class RegisterStaffsController {
             alert.setContentText("An error occurred: " + e.getMessage());
             alert.showAndWait();
         }
-        
     }
 
-    // Initialization method
     @FXML
     public void initialize() {
-        // Initialization code (if needed)
-        // For example, populate ChoiceBoxes with default values:
+        // Make staffID non-editable
+        staffID.setEditable(false);
+
+        // Generate and set new staff ID
+        staffID.setText(generateNewStaffId());
+
+        // Initialize choice boxes
         genderChoiceBox.getItems().addAll("Male", "Female", "Other");
         bloodGroupChoiceBox.getItems().addAll("A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-");
-        DepartmentChoiceBox.getItems().addAll("Administration","Cardiology", "Neurology", "Orthopedics", "Dermatology", "Emergency");
+        DepartmentChoiceBox.getItems().addAll("Administration", "Cardiology", "Neurology", "Orthopedics", "Dermatology", "Emergency");
         staffRoleChoiceBox.getItems().addAll("Admin", "Staff");
+    }
+
+    private String generateNewStaffId() {
+        String newId = "S001";  // Default value
+        try {
+            String query = "SELECT COUNT(*) AS total FROM staffs";
+            Statement stmt = connectionClass.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            if (rs.next()) {
+                int count = rs.getInt("total");
+                newId = "S" + String.format("%03d", count + 1);  // Increment the count and format as desired
+            }
+        } catch (Exception e) {
+            System.out.println("Error generating new staff ID: " + e.getMessage());
+        }
+        return newId;
     }
 }
