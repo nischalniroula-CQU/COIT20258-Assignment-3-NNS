@@ -1,0 +1,7 @@
+Bill Details:
+
+Patient ID: P002
+Name: Rosi Chong
+Department: Orthopedics
+Reason for Visit: Surgery
+Total Bill: $700.0

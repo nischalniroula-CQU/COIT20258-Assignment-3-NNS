@@ -29,11 +29,6 @@ public class HomePageController {
     @FXML
     private Button viewAppointmentButton;
 
-    @FXML
-    private Button billingsButton;
-
-    @FXML
-    private LineChart<String, Number> dashboardChart;
 
     @FXML
     private Label patientsCountLabel;
@@ -178,11 +173,4 @@ private void handleViewPatientsButtonAction(ActionEvent event) {
     }
 }
 
-
-    @FXML
-    private void handleBillingsButtonAction(ActionEvent event) {
-        System.out.println("Billing Button Pressed");
-    }
-
-    // Add more methods or logic as needed
 }

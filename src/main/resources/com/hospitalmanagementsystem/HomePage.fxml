@@ -82,24 +82,7 @@
             </Button>
          </children>
       </Group>
-      <Group layoutX="668.0" layoutY="253.0">
-         <children>
-            <Label layoutX="58.0" layoutY="135.0" text="Billings" textAlignment="CENTER">
-               <font>
-                  <Font name="Raleway" size="13.0" />
-               </font>
-            </Label>
-            <Button fx:id="billingsButton" alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#handleBillingsButtonAction" prefHeight="118.0" prefWidth="160.0" textAlignment="JUSTIFY">
-               <graphic>
-                  <ImageView fitHeight="67.0" fitWidth="82.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../images/bill.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-         </children>
-      </Group>
+      <Group layoutX="668.0" layoutY="253.0" />
       <Label layoutX="1061.0" layoutY="124.0" text="Staff Menu">
          <font>
             <Font name="Raleway SemiBold" size="16.0" />
@@ -110,23 +93,20 @@
             <Image url="@../../images/team.png" />
          </image>
       </ImageView>
-      <Group layoutX="874.0" layoutY="253.0">
-         <children>
-            <Label layoutX="21.0" layoutY="137.0" text="View Appointments" textAlignment="CENTER">
-               <font>
-                  <Font name="Raleway" size="13.0" />
-               </font>
-            </Label>
-            <Button fx:id="viewAppointmentButton" alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#ViewAppointmentsButtonAction" prefHeight="118.0" prefWidth="160.0" textAlignment="JUSTIFY">
-               <graphic>
-                  <ImageView fitHeight="67.0" fitWidth="82.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../images/viewappointment.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-         </children>
-      </Group>
+      <Group layoutX="874.0" layoutY="253.0" />
+      <Label layoutX="696.0" layoutY="392.0" text="View Appointments" textAlignment="CENTER">
+         <font>
+            <Font name="Raleway" size="13.0" />
+         </font>
+      </Label>
+      <Button fx:id="viewAppointmentButton" alignment="CENTER" contentDisplay="BOTTOM" layoutX="675.0" layoutY="255.0" mnemonicParsing="false" onAction="#ViewAppointmentsButtonAction" prefHeight="118.0" prefWidth="160.0" textAlignment="JUSTIFY">
+         <graphic>
+            <ImageView fitHeight="67.0" fitWidth="82.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/viewappointment.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>

@@ -8,6 +8,8 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 public class ViewBillingsController {
 
@@ -102,10 +104,21 @@ public class ViewBillingsController {
 
     try (FileWriter writer = new FileWriter(file)) {
         writer.write(content);
-        System.out.println("Bill exported successfully!");
+        
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Success");
+        alert.setHeaderText(null);
+        alert.setContentText("Bill exported successfully!");
+        alert.showAndWait();
+        
     } catch (IOException e) {
         e.printStackTrace();
-        System.out.println("Error exporting the bill!");
+        
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText("Error exporting the bill. Please try again.");
+        alert.showAndWait();
     }
-}
+    }
 }
