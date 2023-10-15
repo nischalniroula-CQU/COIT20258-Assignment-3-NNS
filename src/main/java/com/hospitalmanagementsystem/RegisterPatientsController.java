@@ -13,6 +13,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
@@ -67,6 +69,12 @@ public class RegisterPatientsController {
     @FXML
     public void initialize() {
         // This method is called after the fxml file is loaded.
+        
+        // Make patientID non-editable
+        patientID.setEditable(false);
+
+        // Generate and set new patient ID
+        patientID.setText(generateNewPatientId());
 
         // Populate genderChoiceBox
         genderChoiceBox.getItems().addAll("Male", "Female", "Other");
@@ -150,6 +158,20 @@ private void submitButtonAction(ActionEvent event) {
         alert.showAndWait();
     }
 }
-
-
+private String generateNewPatientId() {
+        String newId = "P001";  // Default value
+        try {
+            String query = "SELECT COUNT(*) AS total FROM patients";
+            Statement stmt = connectionClass.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            if (rs.next()) {
+                int count = rs.getInt("total");
+                newId = "P" + String.format("%03d", count + 1);  // Increment the count and format as desired
+            }
+        } catch (Exception e) {
+            System.out.println("Error generating new patient ID: " + e.getMessage());
+        }
+        return newId;
     }
+}
+
