@@ -18,7 +18,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        // Initialize the database connection here.
+        
         try {
             connectionClass = new ConnectionClass();
         } catch(Exception e) {

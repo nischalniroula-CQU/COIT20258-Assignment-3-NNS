@@ -1,5 +1,6 @@
 package com.hospitalmanagementsystem;
 
+import com.hospitalmanagementsystem.model.Patient;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Connection;

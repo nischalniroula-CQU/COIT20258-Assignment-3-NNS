@@ -1,5 +1,6 @@
 package com.hospitalmanagementsystem;
 
+import com.hospitalmanagementsystem.model.Patient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

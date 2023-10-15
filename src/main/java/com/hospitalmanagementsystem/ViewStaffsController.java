@@ -1,5 +1,6 @@
 package com.hospitalmanagementsystem;
 
+import com.hospitalmanagementsystem.model.Staff;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

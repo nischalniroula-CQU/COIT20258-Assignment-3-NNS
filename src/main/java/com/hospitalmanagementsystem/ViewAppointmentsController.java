@@ -1,5 +1,6 @@
 package com.hospitalmanagementsystem;
 
+import com.hospitalmanagementsystem.model.Schedule;
 import java.io.IOException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
