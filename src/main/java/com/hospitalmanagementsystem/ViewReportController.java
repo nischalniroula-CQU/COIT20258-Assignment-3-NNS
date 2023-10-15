@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 public class ViewReportController {
 
@@ -37,6 +39,9 @@ public class ViewReportController {
     private TextArea emergencyStaffsID;
     @FXML
     private TextArea administrationStaffsID;
+    
+    @FXML
+    private Button cancelButton;
 
     private Connection connection;
 
@@ -50,6 +55,19 @@ public class ViewReportController {
         setAllTextAreasNonEditable();
         setAllTextAreasDefaultZero();
         displayReportData();
+    }
+    
+    @FXML
+    private void cancelButtonAction() {
+        try {
+        // Get the current stage using the cancel button
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+
+        // Close the stage
+        stage.close();
+        } catch (Exception e) {
+        e.printStackTrace();
+        }
     }
 
     private void setAllTextAreasNonEditable() {
@@ -172,10 +190,5 @@ public class ViewReportController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    @FXML
-    private void cancelButtonAction() {
-        // Handle the cancel button action here
     }
 }

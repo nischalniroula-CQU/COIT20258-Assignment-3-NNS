@@ -42,6 +42,9 @@ public class RegisterPatientsController {
 
     @FXML
     private ChoiceBox<String> DepartmentChoiceBox1;
+    
+    @FXML
+    private ChoiceBox<String> ReasonChoiceBox;
 
     @FXML
     private Button cancelButton;
@@ -73,6 +76,9 @@ public class RegisterPatientsController {
 
         // Populate DepartmentChoiceBox1
         DepartmentChoiceBox1.getItems().addAll("Cardiology", "Neurology", "Orthopedics", "Dermatology", "Emergency");
+        
+        // Populate ReasonChoiceBox
+        ReasonChoiceBox.getItems().addAll("Normal Checkup", "Surgery", "Intensive Care Requirement", "Chronic Illness Management", "Accident and Trauma Care");
     }
 
     @FXML
@@ -99,11 +105,13 @@ public class RegisterPatientsController {
     }
 
     @FXML
-    private void submitButtonAction(ActionEvent event) {
-        // Handle the submit button logic here.
+private void submitButtonAction(ActionEvent event) {
+    // Handle the submit button logic here.
 
-        try {
-        String query = "INSERT INTO patients (patient_id, first_name, last_name, date_of_birth, gender, blood_group, department, height, weight, blood_pressure, bmi) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    try {
+        
+        String query = "INSERT INTO patients (patient_id, first_name, last_name, date_of_birth, gender, blood_group, department, height, weight, blood_pressure, bmi, reason) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        
         PreparedStatement preparedStatement = connectionClass.con.prepareStatement(query);
         preparedStatement.setString(1, patientID.getText());
         preparedStatement.setString(2, firstNameID.getText());
@@ -116,30 +124,32 @@ public class RegisterPatientsController {
         preparedStatement.setFloat(9, Float.parseFloat(weightID.getText()));
         preparedStatement.setString(10, bloodPressureID.getText());
         preparedStatement.setFloat(11, Float.parseFloat(bmiID.getText()));
+        preparedStatement.setString(12, ReasonChoiceBox.getValue());  
 
-            int result = preparedStatement.executeUpdate();
+        int result = preparedStatement.executeUpdate();
 
-            if (result == 1) {
-                Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle("Success");
-                alert.setHeaderText(null);
-                alert.setContentText("Patient registered successfully!");
-                alert.showAndWait();
-                cancelButtonAction(event); // Navigate back to the home page after successful registration
-            } else {
-                Alert alert = new Alert(AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(null);
-                alert.setContentText("Failed to register patient. Please try again.");
-                alert.showAndWait();
-            }
-        } catch (Exception e) {
+        if (result == 1) {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText(null);
+            alert.setContentText("Patient registered successfully!");
+            alert.showAndWait();
+            cancelButtonAction(event); // Navigate back to the home page after successful registration
+        } else {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText(null);
-            alert.setContentText("An error occurred: " + e.getMessage());
+            alert.setContentText("Failed to register patient. Please try again.");
             alert.showAndWait();
         }
+    } catch (Exception e) {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText("An error occurred: " + e.getMessage());
+        alert.showAndWait();
     }
+}
+
 
     }

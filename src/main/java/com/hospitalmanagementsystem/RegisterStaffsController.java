@@ -55,7 +55,7 @@ public class RegisterStaffsController {
     private void cancelButtonAction() {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
-    }
+    } 
 
     @FXML
     private void submitButtonAction() {

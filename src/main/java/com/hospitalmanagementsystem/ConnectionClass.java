@@ -97,10 +97,12 @@ private void createPatientsTable() throws SQLException {
             + "height DOUBLE(5,2),"
             + "weight DECIMAL(4,2),"
             + "blood_pressure VARCHAR(7),"
-            + "bmi DECIMAL(4,2)"
+            + "bmi DECIMAL(4,2),"
+            + "reason ENUM('Normal Checkup', 'Surgery', 'Intensive Care Requirement', 'Chronic Illness Management', 'Accident and Trauma Care') NOT NULL"
             + ")";
     stm.executeUpdate(createTableSQL);
 }
+
 
     
 private void createStaffsTable() throws SQLException {

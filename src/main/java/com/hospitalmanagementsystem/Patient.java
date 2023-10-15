@@ -12,12 +12,13 @@ public class Patient {
     private double weight;
     private String bloodPressure;
     private double bmi;
+    private String reason;
 
     // Constructor
     public Patient(String patientID, String firstName, String lastName, 
                    String dateOfBirth, String gender, String bloodGroup, 
                    String department, double height, double weight, 
-                   String bloodPressure, double bmi) {
+                   String bloodPressure, double bmi, String reason) {
         this.patientID = patientID;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -29,6 +30,7 @@ public class Patient {
         this.weight = weight;
         this.bloodPressure = bloodPressure;
         this.bmi = bmi;
+        this.reason = reason;
     }
 
     // Getters
@@ -75,6 +77,10 @@ public class Patient {
     public double getBmi() {
         return bmi;
     }
+    
+    public String getReason() {
+        return reason;
+    }
 
     // Setters
     public void setPatientID(String patientID) {
@@ -120,6 +126,10 @@ public class Patient {
     public void setBmi(double bmi) {
         this.bmi = bmi;
     }
+    
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
 
     // `toString` method
     @Override
@@ -135,7 +145,8 @@ public class Patient {
                 ", height=" + height +
                 ", weight=" + weight +
                 ", bloodPressure='" + bloodPressure + '\'' +
-                ", bmi=" + bmi +
+                ", bmi='" + bmi + '\'' +
+                ", reason=" + reason +
                 '}';
     }
 }

@@ -89,8 +89,9 @@ public class SearchPatientIDController {
             double weight = resultSet.getDouble("weight");
             String bloodPressure = resultSet.getString("blood_pressure");
             double bmi = resultSet.getDouble("bmi");
+            String reason = resultSet.getString("reason");
 
-            return new Patient(patientID, firstName, lastName, dateOfBirth, gender, bloodGroup, department, height, weight, bloodPressure, bmi);
+            return new Patient(patientID, firstName, lastName, dateOfBirth, gender, bloodGroup, department, height, weight, bloodPressure, bmi, reason);
         }
     } catch (Exception e) {
         e.printStackTrace();

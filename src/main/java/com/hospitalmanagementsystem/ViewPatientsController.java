@@ -1,12 +1,15 @@
 package com.hospitalmanagementsystem;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,11 +18,15 @@ import javafx.stage.Stage;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Modality;
 
 public class ViewPatientsController {
 
     @FXML
     private Button cancelButton;
+    
+    @FXML
+    private Button billingID;
     
     @FXML
     private Button editButtonID;
@@ -46,6 +53,9 @@ public class ViewPatientsController {
     private TextArea bloodPressureID;
     @FXML
     private TextArea bmiID;
+    
+    @FXML
+    private TextArea reasonID;
 
     @FXML
     public void initialize() {
@@ -64,20 +74,47 @@ public class ViewPatientsController {
         weightID.setEditable(false);
         bloodPressureID.setEditable(false);
         bmiID.setEditable(false);
+        reasonID.setEditable(false);
+        
     }
 
     @FXML
-    private void cancelButtonAction() {
+        private void cancelButtonAction() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("HomePage.fxml"));
-            Parent homePage = loader.load();
-            Stage stage = (Stage) cancelButton.getScene().getWindow();
-            stage.setScene(new Scene(homePage));
-            stage.show();
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        stage.close();
         } catch (Exception e) {
-            e.printStackTrace();
+        e.printStackTrace();
         }
     }
+        
+    @FXML
+private void handleBillingButtonAction(ActionEvent event) {
+    try {
+        // Load the SearchPatientID.fxml content
+        Parent searchBillingContent = FXMLLoader.load(getClass().getResource("ViewBillings.fxml"));
+
+        // Create a new scene with the loaded content
+        Scene searchBillingScene = new Scene(searchBillingContent);
+
+        // Create a new stage to display the search patient content
+        Stage searchBillingStage = new Stage();
+        searchBillingStage.setScene(searchBillingScene);
+
+        
+        searchBillingStage.initOwner(((Node) (event.getSource())).getScene().getWindow()); // Set the owner of the new window to the current window
+
+        // Display the new stage
+        searchBillingStage.show();
+
+    } catch (IOException e) {
+        e.
+                printStackTrace();
+        System.out.println("Error loading ViewBilling.fxml");
+        // Handle the exception (show an alert or log the error)
+    }
+}
+
     
     @FXML
     private void editButtonAction() {
@@ -103,6 +140,7 @@ public class ViewPatientsController {
         weightID.setText(String.valueOf(patient.getWeight()));
         bloodPressureID.setText(patient.getBloodPressure());
         bmiID.setText(String.valueOf(patient.getBmi()));
+        reasonID.setText(String.valueOf(patient.getReason()));
     }
 
     private void toggleTextAreasEditable() {
@@ -118,6 +156,7 @@ public class ViewPatientsController {
         weightID.setEditable(!isEditable);
         bloodPressureID.setEditable(!isEditable);
         bmiID.setEditable(!isEditable);
+        reasonID.setEditable(!isEditable);
     }
 
     private void saveEditedDetailsToDatabase() {
@@ -133,11 +172,12 @@ public class ViewPatientsController {
     String weightValue = weightID.getText();
     String bloodPressureValue = bloodPressureID.getText();
     String bmiValue = bmiID.getText();
+    String reasonValue = reasonID.getText();
 
     // Use prepared statements to update the database
     ConnectionClass connectionClass = new ConnectionClass();
     Connection connection = connectionClass.con;
-    String sql = "UPDATE patients SET first_name = ?, last_name = ?, date_of_birth = ?, gender = ?, blood_group = ?, department = ?, height = ?, weight = ?, blood_pressure = ?, bmi = ? WHERE patient_id = ?";
+    String sql = "UPDATE patients SET first_name = ?, last_name = ?, date_of_birth = ?, gender = ?, blood_group = ?, department = ?, height = ?, weight = ?, blood_pressure = ?, bmi = ?, reason = ? WHERE patient_id = ?";
 
     try {
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -150,8 +190,9 @@ public class ViewPatientsController {
         preparedStatement.setDouble(7, Double.parseDouble(heightValue)); // parsing as Double
         preparedStatement.setBigDecimal(8, new BigDecimal(weightValue)); // using BigDecimal
         preparedStatement.setString(9, bloodPressureValue);
-        preparedStatement.setBigDecimal(10, new BigDecimal(bmiValue)); // using BigDecimal
-        preparedStatement.setString(11, patientIDValue);
+        preparedStatement.setBigDecimal(10, new BigDecimal(bmiValue));
+        preparedStatement.setString(11, reasonValue);
+        preparedStatement.setString(12, patientIDValue);
 
         int affectedRows = preparedStatement.executeUpdate();
         if (affectedRows == 0) {
@@ -199,7 +240,8 @@ public class ViewPatientsController {
                     resultSet.getDouble("height"),
                     resultSet.getBigDecimal("weight").doubleValue(), 
                     resultSet.getString("blood_pressure"),
-                    resultSet.getBigDecimal("bmi").doubleValue() 
+                    resultSet.getBigDecimal("bmi").doubleValue(),
+                    resultSet.getString("reason")
             );
             return patient;
         }

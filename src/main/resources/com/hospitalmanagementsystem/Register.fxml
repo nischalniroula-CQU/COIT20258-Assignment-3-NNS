@@ -106,5 +106,11 @@
          </font>
       </Label>
       <TextField fx:id="bloodPressureID" layoutX="142.0" layoutY="412.0" />
+      <Label layoutX="39.0" layoutY="475.0" text="Reason:" textFill="#2986c3">
+         <font>
+            <Font name="Raleway" size="13.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="ReasonChoiceBox" layoutX="142.0" layoutY="470.0" prefHeight="25.0" prefWidth="161.0" />
    </children>
 </AnchorPane>
