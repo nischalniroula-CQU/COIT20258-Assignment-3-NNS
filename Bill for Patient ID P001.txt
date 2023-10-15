@@ -1,0 +1,7 @@
+Bill Details:
+
+Patient ID: P001
+Name: Hassan Sayyar
+Department: Neurology
+Reason for Visit: Normal Checkup
+Total Bill: $100.0

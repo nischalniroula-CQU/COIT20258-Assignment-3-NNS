@@ -91,8 +91,14 @@ public class ViewPatientsController {
     @FXML
 private void handleBillingButtonAction(ActionEvent event) {
     try {
-        // Load the SearchPatientID.fxml content
-        Parent searchBillingContent = FXMLLoader.load(getClass().getResource("ViewBillings.fxml"));
+        // Load the ViewBillings.fxml content
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewBillings.fxml"));
+        Parent searchBillingContent = loader.load();
+
+        // Access the controller and set patient data
+        ViewBillingsController billingController = loader.getController();
+        Patient patient = getPatientDetailsFromDatabase(patientID.getText());  // Fetch the patient details
+        billingController.setPatientData(patient); 
 
         // Create a new scene with the loaded content
         Scene searchBillingScene = new Scene(searchBillingContent);
@@ -100,20 +106,17 @@ private void handleBillingButtonAction(ActionEvent event) {
         // Create a new stage to display the search patient content
         Stage searchBillingStage = new Stage();
         searchBillingStage.setScene(searchBillingScene);
-
-        
         searchBillingStage.initOwner(((Node) (event.getSource())).getScene().getWindow()); // Set the owner of the new window to the current window
 
         // Display the new stage
         searchBillingStage.show();
 
     } catch (IOException e) {
-        e.
-                printStackTrace();
+        e.printStackTrace();
         System.out.println("Error loading ViewBilling.fxml");
-        // Handle the exception (show an alert or log the error)
     }
 }
+
 
     
     @FXML
