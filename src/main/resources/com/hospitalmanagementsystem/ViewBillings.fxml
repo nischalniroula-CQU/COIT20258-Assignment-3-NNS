@@ -11,6 +11,11 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="485.0" prefWidth="762.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hospitalmanagementsystem.ViewBillingsController">
    <children>
+      <ImageView fitHeight="491.0" fitWidth="762.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/billingbg.png" />
+         </image>
+      </ImageView>
       <Group layoutX="42.0" layoutY="95.0" />
       <Group layoutX="239.0" layoutY="175.0" />
       <Label layoutX="42.0" layoutY="39.0" text="Billing for Patient ID:" textFill="#2986c3">

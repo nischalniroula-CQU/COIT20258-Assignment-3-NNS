@@ -9,8 +9,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane stylesheets="@styles.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="225.0" prefWidth="397.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hospitalmanagementsystem.SearchPatientIDController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="225.0" prefWidth="397.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hospitalmanagementsystem.SearchPatientIDController">
    <children>
+      <ImageView fitHeight="225.0" fitWidth="407.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/searchbg.png" />
+         </image>
+      </ImageView>
       <Group layoutX="42.0" layoutY="95.0" />
       <Group layoutX="239.0" layoutY="175.0" />
       <Label layoutX="42.0" layoutY="39.0" text="Search Patient ID" textFill="#2986c3">

@@ -156,7 +156,7 @@ public class ViewReportController {
                             emergencyPatientsID.setText(String.valueOf(rsDepartmentPatients.getInt(1)));
                             break;
                         case "Administration":
-                            administrationStaffsID.setText(String.valueOf(rsDepartmentPatients.getInt(1)));  // This line might need some correction based on your requirements.
+                            administrationStaffsID.setText(String.valueOf(rsDepartmentPatients.getInt(1)));  
                             break;
                     }
                 }

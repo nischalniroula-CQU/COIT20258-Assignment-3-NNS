@@ -13,6 +13,11 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hospitalmanagementsystem.RegisterStaffsController">
    <children>
+      <ImageView fitHeight="800.0" fitWidth="1200.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/innerpagebg.png" />
+         </image>
+      </ImageView>
       <ImageView fitHeight="58.0" fitWidth="133.0" layoutX="26.0" layoutY="715.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/hospital%20logo.png" />
@@ -21,7 +26,7 @@
          <font>
             <Font name="Raleway" size="13.0" />
          </font></Button>
-      <Label layoutX="49.0" layoutY="74.0" text="Register New Staff" textFill="#2986c3">
+      <Label layoutX="36.0" layoutY="73.0" text="Register New Staff" textFill="#2986c3">
          <font>
             <Font name="Raleway SemiBold" size="16.0" />
          </font>
